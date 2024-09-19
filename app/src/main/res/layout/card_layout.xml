@@ -5,7 +5,7 @@
     android:layout_width="175dp"
     android:layout_height="245dp"
     android:layout_margin="8dp"
-    android:background="@drawable/box_background"
+    android:background="@drawable/cardbox_background"
     android:elevation="3dp">
 
     <com.google.android.material.imageview.ShapeableImageView
