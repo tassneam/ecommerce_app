@@ -5,6 +5,8 @@
     <color name="purple">#897AE4</color>
     <color name="light_purple">#AFA4F6</color>
     <color name="dark_grey">#504F4F</color>
+    <color name="light_grey">#CAC7C7</color>
     <color name="bg_color">#F4F8FB</color>
+    <color name="yellow">#FFEB3B</color>
 
 </resources>
