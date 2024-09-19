@@ -19,10 +19,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/SearchBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/search_box_background">
+            android:background="@drawable/box_background">
 
             <TextView
                 android:layout_width="0dp"
@@ -31,7 +32,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:singleLine="true"
-                android:text="Search Anything"
+                android:text="Search anything"
                 android:textColor="@color/dark_grey"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -43,9 +44,31 @@
                 android:layout_height="20dp"
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/ic_search"
-                app:layout_constraintBottom_toBottom0f="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTop0f="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_mic" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_notifications" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
