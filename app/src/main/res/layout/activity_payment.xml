@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".Payment"
+    android:background="@color/white">
+
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="70dp"
+    app:cardCornerRadius="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        android:layout_margin="5dp">
+
+
+        <!-- Icon (Logo) -->
+        <ImageView
+            android:id="@+id/payment_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Logo" />
+
+
+
+        <!-- Payment Methods Icons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/visa_logo"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/visa"
+                android:contentDescription="Visa Logo"
+                android:padding="8dp" />
+
+            <ImageView
+                android:id="@+id/mastercard_logo"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/mastercard_logo"
+                android:contentDescription="MasterCard Logo"
+                android:padding="8dp" />
+
+            <ImageView
+                android:id="@+id/paypal_logo"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/paypal_logo"
+                android:contentDescription="PayPal Logo"
+                android:padding="8dp" />
+        </LinearLayout>
+
+        <!-- Card Number Input -->
+        <EditText
+            android:id="@+id/card_number_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CARD NUMBER"
+            android:inputType="number"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:drawableRight="@drawable/card_icon" />
+
+        <!-- Expiration Date and CVV Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- Expiration Date -->
+            <EditText
+                android:id="@+id/expiration_date_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="MM / YY"
+                android:inputType="date"
+                android:background="@android:drawable/editbox_background"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:layout_marginRight="8dp" />
+
+            <!-- CVV -->
+            <EditText
+                android:id="@+id/cvv_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="CVV"
+                android:inputType="numberPassword"
+                android:background="@android:drawable/editbox_background"
+                android:padding="12dp"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="20dp">
+
+                <!-- Total Amount Text -->
+                <TextView
+                    android:id="@+id/total_amount_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TOTAL AMOUNT:"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Total Amount Value -->
+                <TextView
+                    android:id="@+id/total_amount_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="250.0"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="50dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EGY"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="7dp">
+                </TextView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <!-- Secure Payment Label -->
+        <TextView
+            android:id="@+id/secure_payment_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SECURE PAYMENT"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:layout_margin="20dp"/>
+
+        <!-- Donate Button -->
+        <Button
+            android:id="@+id/check_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Check Out"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:backgroundTint="@color/purble"
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="40dp"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+</LinearLayout>
