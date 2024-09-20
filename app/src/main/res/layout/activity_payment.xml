@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:contentDescription="Logo" />
+            android:contentDescription="@string/logo" />
 
 
 
@@ -50,7 +50,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:src="@drawable/visa"
-                android:contentDescription="Visa Logo"
+                android:contentDescription="@string/visa_logo"
                 android:padding="8dp" />
 
             <ImageView
@@ -59,7 +59,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:src="@drawable/mastercard_logo"
-                android:contentDescription="MasterCard Logo"
+                android:contentDescription="@string/mastercard_logo"
                 android:padding="8dp" />
 
             <ImageView
@@ -68,7 +68,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:src="@drawable/paypal_logo"
-                android:contentDescription="PayPal Logo"
+                android:contentDescription="@string/paypal_logo"
                 android:padding="8dp" />
         </LinearLayout>
 
@@ -77,13 +77,13 @@
             android:id="@+id/card_number_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="CARD NUMBER"
+            android:hint="@string/card_number"
             android:inputType="number"
             android:background="@android:drawable/editbox_background"
             android:padding="12dp"
             android:textSize="16sp"
             android:layout_marginBottom="8dp"
-            android:drawableRight="@drawable/card_icon" />
+            android:drawableRight="@drawable/card" />
 
         <!-- Expiration Date and CVV Row -->
         <LinearLayout
@@ -98,12 +98,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="MM / YY"
+                android:hint="@string/mm_yy"
                 android:inputType="date"
                 android:background="@android:drawable/editbox_background"
                 android:padding="12dp"
                 android:textSize="16sp"
-                android:layout_marginRight="8dp" />
+                android:layout_marginEnd="8dp" />
 
             <!-- CVV -->
             <EditText
@@ -111,7 +111,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="CVV"
+                android:hint="@string/cvv"
                 android:inputType="numberPassword"
                 android:background="@android:drawable/editbox_background"
                 android:padding="12dp"
@@ -132,7 +132,7 @@
                     android:id="@+id/total_amount_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TOTAL AMOUNT:"
+                    android:text="@string/total_amount"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="16sp"
                     android:layout_marginBottom="8dp" />
@@ -142,7 +142,7 @@
                     android:id="@+id/total_amount_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="250.0"
+                    android:text="@string/_250_0"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -151,7 +151,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="EGY"
+                    android:text="@string/egy"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -165,7 +165,7 @@
             android:id="@+id/secure_payment_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SECURE PAYMENT"
+            android:text="@string/secure_payment"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"
             android:layout_marginBottom="16dp"
@@ -177,7 +177,7 @@
             android:id="@+id/check_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Check Out"
+            android:text="@string/check_out"
             android:textSize="18sp"
             android:padding="12dp"
             android:backgroundTint="@color/purble"

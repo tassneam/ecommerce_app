@@ -2,4 +2,16 @@
     <string name="app_name">ecommerce_app</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="check_out">Check Out</string>
+    <string name="secure_payment">SECURE PAYMENT</string>
+    <string name="egy">EGY</string>
+    <string name="_250_0">250.0</string>
+    <string name="total_amount">TOTAL AMOUNT:</string>
+    <string name="cvv">CVV</string>
+    <string name="mm_yy">MM / YY</string>
+    <string name="card_number">CARD NUMBER</string>
+    <string name="paypal_logo">PayPal Logo</string>
+    <string name="mastercard_logo">MasterCard Logo</string>
+    <string name="visa_logo">Visa Logo</string>
+    <string name="logo">Logo</string>
 </resources>
