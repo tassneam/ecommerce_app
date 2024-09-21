@@ -23,10 +23,8 @@
             android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
             android:background="@null"
             android:hint="Search anything"
-
             android:paddingStart="20dp"
             android:singleLine="true"
             android:textColor="@color/dark_grey"
@@ -35,8 +33,6 @@
             app:layout_constraintEnd_toStartOf="@id/searchIcon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Search Icon -->
         <ImageView
             android:id="@+id/searchIcon"
             android:layout_width="20dp"
@@ -48,7 +44,6 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Cancel Button Outside Search Bar -->
     <TextView
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
@@ -57,20 +52,32 @@
         android:text="Cancel"
         android:textColor="@color/dark_grey"
         android:textSize="15sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/searchBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/searchBar"
-        tools:visibility="visible" />
-
+        app:layout_constraintTop_toTopOf="@id/searchBar" />
+    <TextView
+        android:id="@+id/categoriesTxtView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="24dp"
+        android:text="Categories"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCategoriescards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        app:layout_constraintStart_toStartOf="@id/categoriesTxtView"
+        app:layout_constraintTop_toBottomOf="@id/categoriesTxtView"
         app:spanCount="2"
-        tools:listitem="@layout/category_card_layout"
         tools:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        app:layout_constraintStart_toStartOf="@id/searchBar"
-        app:layout_constraintTop_toBottomOf="@id/searchBar" />
+        tools:listitem="@layout/category_card_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
