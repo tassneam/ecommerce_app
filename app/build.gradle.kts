@@ -10,6 +10,7 @@ plugins {
 android {
     buildFeatures{
         viewBinding=true
+        dataBinding=true
     }
     namespace = "com.example.ecommerce_app"
     compileSdk = 34
