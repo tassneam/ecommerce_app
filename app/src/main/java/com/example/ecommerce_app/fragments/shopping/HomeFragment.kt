@@ -10,20 +10,20 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce_app.R
-import com.example.ecommerce_app.adapters.CategoriesAdapter
+import com.example.ecommerce_app.adapters.HomeCategoriesAdapter
 import com.example.ecommerce_app.databinding.FragmentHomeBinding
 import com.example.ecommerce_app.models.Category
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var categoriesAdapter: CategoriesAdapter
+    private lateinit var homeCategoriesAdapter: HomeCategoriesAdapter
 
     private val categories = listOf(
-        Category("Sale", R.drawable.sale_cat),
-        Category("Dresses", R.drawable.dress_cat),
-        Category("T-shirts", R.drawable.tshirt_cat),
-        Category("Pants", R.drawable.pants_cat),
-        Category("Jeans", R.drawable.jeans_cat)
+        Category("Sale", R.drawable.sale),
+        Category("Dresses", R.drawable.dress),
+        Category("T-shirts", R.drawable.tshirt),
+        Category("Pants", R.drawable.pants),
+        Category("Jeans", R.drawable.jeans)
     )
 
     override fun onCreateView(
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         // Simulating a network delay
         Handler(Looper.getMainLooper()).postDelayed({
             // Initialize the adapter after data is "loaded"
-            categoriesAdapter = CategoriesAdapter(categories) { category ->
+            homeCategoriesAdapter = HomeCategoriesAdapter(categories) { category ->
                 when (category.title) {
                     "Sale" -> findNavController().navigate(R.id.action_homeFragment_to_saleFragment)
                     "Dresses" -> findNavController().navigate(R.id.action_homeFragment_to_dressesFragment)
@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
             }
 
             // Set the adapter
-            binding.recyclerViewCategories.adapter = categoriesAdapter
+            binding.recyclerViewCategories.adapter = homeCategoriesAdapter
 
             // Hide progress bar and show RecyclerView
             binding.progressBarCategories.visibility = View.GONE
