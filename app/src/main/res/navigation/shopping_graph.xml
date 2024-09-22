@@ -37,6 +37,21 @@
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_jeansFragment"
+            app:destination="@id/jeansFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_dressesFragment"
+            app:destination="@id/dressesFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_saleFragment"
+            app:destination="@id/saleFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_tshirtsFragment"
+            app:destination="@id/tshirtsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_pantsFragment"
+            app:destination="@id/pantsFragment" />
     </fragment>
     <fragment
         android:id="@+id/dressesFragment"

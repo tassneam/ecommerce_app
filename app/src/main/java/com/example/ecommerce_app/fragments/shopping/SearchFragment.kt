@@ -11,13 +11,27 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce_app.R
+import com.example.ecommerce_app.adapters.CategoryAdapter
+import com.example.ecommerce_app.adapters.HomeCategoriesAdapter
 import com.example.ecommerce_app.databinding.FragmentSearchBinding
+import com.example.ecommerce_app.models.Category
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 
 
 class SearchFragment : Fragment() {
     lateinit var binding: FragmentSearchBinding
+    lateinit var categoryAdapter: CategoryAdapter
+    private val categories = listOf(
+        Category("Sale", R.drawable.sale),
+        Category("Dresses", R.drawable.dress),
+        Category("T-shirts", R.drawable.tshirt),
+        Category("Pants", R.drawable.pants),
+        Category("Jeans", R.drawable.jeans)
+    )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +67,19 @@ class SearchFragment : Fragment() {
             hideKeyboard()
 
         }
+
+        binding.recyclerViewCategoriescards.layoutManager = GridLayoutManager(context, 2)
+        categoryAdapter = CategoryAdapter(categories) { category ->
+            when (category.title) {
+                "Sale" -> findNavController().navigate(R.id.action_searchFragment_to_saleFragment)
+                "Dresses" -> findNavController().navigate(R.id.action_searchFragment_to_dressesFragment)
+                "T-shirts" -> findNavController().navigate(R.id.action_searchFragment_to_tshirtsFragment)
+                "Pants" -> findNavController().navigate(R.id.action_searchFragment_to_pantsFragment)
+                "Jeans" -> findNavController().navigate(R.id.action_searchFragment_to_jeansFragment)
+            }
+        }
+        binding.recyclerViewCategoriescards.adapter = categoryAdapter
+
     }
 
     private fun hideKeyboard() {
@@ -63,4 +90,5 @@ class SearchFragment : Fragment() {
             inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
+
 }
