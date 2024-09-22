@@ -23,7 +23,10 @@ class HomeFragment : Fragment() {
         Category("Dresses", R.drawable.dress),
         Category("T-shirts", R.drawable.tshirt),
         Category("Pants", R.drawable.pants),
-        Category("Jeans", R.drawable.jeans)
+        Category("Jeans", R.drawable.jeans),
+        Category("See all", R.drawable.ic_plus)
+
+
     )
 
     override fun onCreateView(
@@ -61,6 +64,7 @@ class HomeFragment : Fragment() {
                     "T-shirts" -> findNavController().navigate(R.id.action_homeFragment_to_tshirtsFragment)
                     "Pants" -> findNavController().navigate(R.id.action_homeFragment_to_pantsFragment)
                     "Jeans" -> findNavController().navigate(R.id.action_homeFragment_to_jeansFragment)
+                    "See all" -> findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
                 }
             }
 
