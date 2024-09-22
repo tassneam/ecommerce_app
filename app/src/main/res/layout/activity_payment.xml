@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".Payment"
+    tools:context=".activities.Payment"
     android:background="@color/white">
 
 <androidx.cardview.widget.CardView
@@ -180,7 +180,7 @@
             android:text="@string/check_out"
             android:textSize="18sp"
             android:padding="12dp"
-            android:backgroundTint="@color/purble"
+            android:backgroundTint="@color/purple"
             android:layout_marginTop="120dp"
             android:layout_marginBottom="40dp"/>
     </LinearLayout>

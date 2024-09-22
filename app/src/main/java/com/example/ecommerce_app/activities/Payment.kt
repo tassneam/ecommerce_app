@@ -1,10 +1,11 @@
-package com.example.ecommerce_app
+package com.example.ecommerce_app.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.ecommerce_app.R
 
 class Payment : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
