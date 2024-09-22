@@ -7,10 +7,10 @@ import com.example.ecommerce_app.R
 import com.example.ecommerce_app.databinding.CategoryLayoutBinding
 import com.example.ecommerce_app.models.Category
 
-class CategoriesAdapter(
+class HomeCategoriesAdapter(
     private val categoryList: List<Category>,
     private val onCategoryClick: (Category) -> Unit
-) : RecyclerView.Adapter<CategoriesAdapter.CategoryHolder>() {
+) : RecyclerView.Adapter<HomeCategoriesAdapter.CategoryHolder>() {
 
     private var selectedPosition = -1
 
