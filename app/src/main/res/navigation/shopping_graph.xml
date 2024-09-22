@@ -13,6 +13,21 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_dressesFragment"
+            app:destination="@id/dressesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_jeansFragment"
+            app:destination="@id/jeansFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_saleFragment"
+            app:destination="@id/saleFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tshirtsFragment"
+            app:destination="@id/tshirtsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_pantsFragment"
+            app:destination="@id/pantsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -21,6 +36,51 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dressesFragment"
+        android:name="com.example.ecommerce_app.fragments.shopping.DressesFragment"
+        android:label="fragment_dresses"
+        tools:layout="@layout/fragment_dresses" >
+        <action
+            android:id="@+id/action_dressesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jeansFragment"
+        android:name="com.example.ecommerce_app.fragments.shopping.JeansFragment"
+        android:label="fragment_jeans"
+        tools:layout="@layout/fragment_jeans" >
+        <action
+            android:id="@+id/action_jeansFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pantsFragment"
+        android:name="com.example.ecommerce_app.fragments.shopping.PantsFragment"
+        android:label="fragment_pants"
+        tools:layout="@layout/fragment_pants" >
+        <action
+            android:id="@+id/action_pantsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tshirtsFragment"
+        android:name="com.example.ecommerce_app.fragments.shopping.TshirtsFragment"
+        android:label="fragment_tshirts"
+        tools:layout="@layout/fragment_tshirts" >
+        <action
+            android:id="@+id/action_tshirtsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saleFragment"
+        android:name="com.example.ecommerce_app.fragments.shopping.SaleFragment"
+        android:label="fragment_sale"
+        tools:layout="@layout/fragment_sale" >
+        <action
+            android:id="@+id/action_saleFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -7,7 +7,7 @@
 
     <!-- Optional: Add a stroke around the circle -->
     <stroke
-        android:width="2dp"
+        android:width="3dp"
         android:color="@color/purple" />
 
     <!-- Optional: Add padding if needed -->
