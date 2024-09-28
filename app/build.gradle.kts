@@ -80,4 +80,18 @@ dependencies {
 
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
+
+    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+    val lifecycle_version = "2.2.0"
+    //    call API
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+//dependency injection
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+}
+kapt {
+    correctErrorTypes = true
 }
