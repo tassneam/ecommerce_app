@@ -7,12 +7,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce_app.R
 import com.example.ecommerce_app.adapters.HomeCategoriesAdapter
+import com.example.ecommerce_app.adapters.ItemAdapter
 import com.example.ecommerce_app.databinding.FragmentHomeBinding
 import com.example.ecommerce_app.models.Category
+import com.example.ecommerce_app.models.Item
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -25,9 +34,11 @@ class HomeFragment : Fragment() {
         Category("Pants", R.drawable.pants),
         Category("Jeans", R.drawable.jeans),
         Category("See all", R.drawable.ic_plus)
-
-
     )
+
+    lateinit var database: DatabaseReference
+    private lateinit var itemList: ArrayList<Item>
+    private lateinit var itemAdapter: ItemAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +62,35 @@ class HomeFragment : Fragment() {
 
         // Simulate loading data (replace with actual data loading logic)
         loadCategories()
+
+        itemList = ArrayList()
+        itemAdapter = ItemAdapter(requireContext(), itemList)
+        binding.recyclerViewCard.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+        binding.recyclerViewCard.setHasFixedSize(true)
+        binding.recyclerViewCard.adapter = itemAdapter
+
+        getItemData()
+    }
+
+    private fun getItemData() {
+        database = FirebaseDatabase.getInstance().getReference("item")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (itemSnapshot in snapshot.children) {
+                        val item = itemSnapshot.getValue(Item::class.java)
+                        itemList.add(item!!)
+                    }
+                    binding.recyclerViewCard.adapter = itemAdapter
+                }
+            }
+
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(),error.message,Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     private fun loadCategories() {
