@@ -5,7 +5,7 @@ plugins {
     id ("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id ("androidx.navigation.safeargs")
-    id("com.google.gms.google-services")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -46,6 +46,7 @@ android {
 
 dependencies {
 
+    implementation(libs.firebase.database)
     val nav_version = "2.7.5"
     implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -76,17 +77,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     // Annotation processor
     ksp("androidx.lifecycle:lifecycle-compiler:$lifecycleVersion")
-    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-firestore")
-    val lifecycle_version = "2.2.0"
-    //    call API
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-//dependency injection
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-}
-kapt {
-    correctErrorTypes = true
+
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
 }
