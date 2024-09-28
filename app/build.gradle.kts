@@ -5,6 +5,7 @@ plugins {
     id ("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id ("androidx.navigation.safeargs")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -45,6 +46,7 @@ android {
 
 dependencies {
 
+    implementation(libs.firebase.database)
     val nav_version = "2.7.5"
     implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -75,4 +77,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     // Annotation processor
     ksp("androidx.lifecycle:lifecycle-compiler:$lifecycleVersion")
+
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
 }
