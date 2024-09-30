@@ -27,6 +27,11 @@ fun ImageView.loadImage(uri: String?, progressDawable: CircularProgressDrawable)
 }
 
 @BindingAdapter("android:imageUrl")
-fun loadImage(view: ImageView, url: String) {
-    view.loadImage(url, getProgessDrawable(view.context))
+fun loadImage(view: ImageView, url: String?) {
+    if (!url.isNullOrEmpty()) {
+        view.loadImage(url, getProgessDrawable(view.context))
+    } else {
+        // Set a placeholder image if the URL is null or empty
+        view.setImageResource(R.drawable.avatar)
+    }
 }
