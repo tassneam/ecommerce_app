@@ -3,6 +3,7 @@ package com.example.ecommerce_app.fragments.shopping
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.ecommerce_app.R
 import com.example.ecommerce_app.adapters.HomeCategoriesAdapter
 import com.example.ecommerce_app.adapters.ItemAdapter
@@ -60,9 +62,8 @@ class HomeFragment : Fragment() {
         binding.recyclerViewCategories.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        // Simulate loading data (replace with actual data loading logic)
         loadCategories()
-
+        loadBannerImage()
         itemList = ArrayList()
         itemAdapter = ItemAdapter(requireContext(), itemList)
         binding.recyclerViewCard.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
@@ -92,6 +93,39 @@ class HomeFragment : Fragment() {
 
         })
     }
+
+
+    private fun loadBannerImage() {
+        // Reference to Firebase Realtime Database for the banner image URL
+        val bannerDatabaseReference = FirebaseDatabase.getInstance().getReference("/banner/imageUrl")
+
+        bannerDatabaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val bannerUrl = snapshot.getValue(String::class.java)
+                    if (bannerUrl != null) {
+                        // Log the URL for debugging
+                        Log.d("HomeFragment", "Banner URL: $bannerUrl")
+
+                        // Load the banner image using Glide
+                        Glide.with(requireContext())
+                            .load(bannerUrl)
+                            .into(binding.bannerImg)
+                    } else {
+                        Log.e("HomeFragment", "Banner URL is null")
+                    }
+                } else {
+                    Log.e("HomeFragment", "Snapshot does not exist")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
 
     private fun loadCategories() {
         // Simulating a network delay
