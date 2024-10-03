@@ -24,7 +24,7 @@ class HomeCategoriesAdapter(
             )
 
             binding.root.setOnClickListener {
-                // Update the selected position and notify the adapter
+                // Update selected position and notify the adapter
                 selectedPosition = position
                 notifyDataSetChanged() // Refresh the entire list
                 onCategoryClick(category) // Trigger the click event

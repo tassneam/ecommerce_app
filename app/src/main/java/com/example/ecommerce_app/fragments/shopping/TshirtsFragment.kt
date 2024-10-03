@@ -53,7 +53,6 @@ class TshirtsFragment : Fragment() {
         }
         popupMenu.show()
     }
-
     private fun sortTshirtsByPriceHighToLow() {
         // Implement sorting logic here
         // E.g., update your RecyclerView adapter with sorted data

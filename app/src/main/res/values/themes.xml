@@ -6,7 +6,6 @@
     </style>
 
     <style name="Theme.Ecommerce_app" parent="Base.Theme.Ecommerce_app" />
-
     <style name="tab_layout">
         <item name="android:textColor">#575757</item>
         <item name="android:textSize">16sp</item>

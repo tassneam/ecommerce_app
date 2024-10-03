@@ -8,18 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce_app.R
 import com.example.ecommerce_app.adapters.CategoryAdapter
-import com.example.ecommerce_app.adapters.HomeCategoriesAdapter
 import com.example.ecommerce_app.databinding.FragmentSearchBinding
 import com.example.ecommerce_app.models.Category
-import com.google.android.material.internal.ViewUtils.hideKeyboard
 
 
 class SearchFragment : Fragment() {
