@@ -1,5 +1,6 @@
 package com.example.ecommerce_app.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -32,8 +33,9 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.action_cartFragment -> {
-                    // Handle navigation for cartFragment
-                    // navController.navigate(R.id.cartFragment)
+                    // Start CartActivity when the cart item is selected
+                    val intent = Intent(this, Cart::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.action_favouriteFragment -> {
