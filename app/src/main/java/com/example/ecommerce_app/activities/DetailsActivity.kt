@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce_app.fragments.shopping.DescriptionFragment
-import com.example.ecommerce_app.R
 import com.example.ecommerce_app.fragments.shopping.ReviewsFragment
 import com.example.ecommerce_app.adapters.DetailsPagerAdapter
 import com.example.ecommerce_app.adapters.SizeAdapter

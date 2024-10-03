@@ -58,7 +58,6 @@ class PantsFragment : Fragment() {
         // Implement sorting logic here
         // E.g., update your RecyclerView adapter with sorted data
     }
-
     private fun sortPantsByPriceLowToHigh() {
         // Implement sorting logic here
         // E.g., update your RecyclerView adapter with sorted data

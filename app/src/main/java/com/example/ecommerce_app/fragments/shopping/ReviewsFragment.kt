@@ -20,7 +20,7 @@ class ReviewsFragment : Fragment() {
     ): View {
         binding = FragmentReviewsBinding.inflate(inflater, container, false)
 
-        // Static review data
+        // Static data
         val staticReviews = listOf(
             Review(1, "John Doe", "Great product!", "https://example.com/john_pic.jpg", 4.5, 101),
             Review(2, "Jane Smith", "Good value for money.", "https://example.com/jane_pic.jpg", 4.0, 101),

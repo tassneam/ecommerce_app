@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.ecommerce_app.databinding.FragmentDescriptionBinding
 
-
 class DescriptionFragment : Fragment() {
     lateinit var binding: FragmentDescriptionBinding
     override fun onCreateView(

@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import kotlinx.parcelize.Parcelize
 
+
 @Entity(tableName = "categories")
 @Parcelize
 data class Category(

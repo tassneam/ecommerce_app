@@ -96,7 +96,6 @@ class HomeFragment : Fragment() {
 
 
     private fun loadBannerImage() {
-        // Reference to Firebase Realtime Database for the banner image URL
         val bannerDatabaseReference = FirebaseDatabase.getInstance().getReference("/banner/imageUrl")
 
         bannerDatabaseReference.addListenerForSingleValueEvent(object : ValueEventListener {

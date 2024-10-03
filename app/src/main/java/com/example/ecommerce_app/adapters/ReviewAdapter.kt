@@ -22,6 +22,5 @@ class ReviewAdapter(private val reviews: List<Review>) : RecyclerView.Adapter<Re
     override fun onBindViewHolder(holder: ReviewHolder, position: Int) {
         holder.bind(reviews[position])
     }
-
     override fun getItemCount() = reviews.size
 }

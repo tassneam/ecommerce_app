@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.ecommerce_app.R
 
+
 fun getProgessDrawable(c: Context): CircularProgressDrawable {
     return CircularProgressDrawable(c).apply {
         strokeWidth = 5f

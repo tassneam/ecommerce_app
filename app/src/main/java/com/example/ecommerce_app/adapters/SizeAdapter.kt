@@ -27,7 +27,6 @@ class SizeAdapter(private var sizeList: List<String>) : RecyclerView.Adapter<Siz
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SizeHolder {
         val binding = SizeLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SizeHolder(binding)
