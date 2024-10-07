@@ -78,6 +78,6 @@ class Cart : AppCompatActivity() {
 
     private fun updateTotalPrice() {
         val totalPrice = cartItemsList.sumOf { it.price * it.quantity }
-        totalPriceTextView.text = "Total: $totalPrice $"
+        totalPriceTextView.text = "Total: $totalPrice EGP"
     }
 }

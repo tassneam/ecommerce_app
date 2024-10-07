@@ -41,7 +41,7 @@ class CartAdapter(
 
         // Bind data to the views
         holder.productTitle.text = currentItem.title
-        holder.productPrice.text = "${currentItem.price * currentItem.quantity} $"  // Update price based on quantity
+        holder.productPrice.text = "${currentItem.price * currentItem.quantity} EGP"  // Update price based on quantity
         holder.quantity.text = currentItem.quantity.toString()
 
         // Load image using Glide (assuming imageUrl is used)
@@ -54,7 +54,7 @@ class CartAdapter(
         holder.increaseQuantity.setOnClickListener {
             currentItem.quantity++
             holder.quantity.text = currentItem.quantity.toString()
-            holder.productPrice.text = "${currentItem.price * currentItem.quantity} $"  // Update price
+            holder.productPrice.text = "${currentItem.price * currentItem.quantity} EGP"  // Update price
             updateItemInFirebase(currentItem)  // Update Firebase
             notifyItemChanged(position)  // Update item in the RecyclerView
             // Notify the activity of the price change
@@ -66,7 +66,7 @@ class CartAdapter(
             if (currentItem.quantity > 1) {
                 currentItem.quantity--
                 holder.quantity.text = currentItem.quantity.toString()
-                holder.productPrice.text = "${currentItem.price * currentItem.quantity} $"  // Update price
+                holder.productPrice.text = "${currentItem.price * currentItem.quantity} EGP"  // Update price
                 updateItemInFirebase(currentItem)  // Update Firebase
                 notifyItemChanged(position)
                 // Notify the activity of the price change
