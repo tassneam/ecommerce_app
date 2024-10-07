@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ecommerce_app.Data.CartItem
+import com.example.ecommerce_app.models.CartItem
 import com.example.ecommerce_app.R
 
-class CartAdapter(private val cartItems: MutableList<CartItem>):
+class CartAdapter(private val cartItems: MutableList<CartItem>) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productPhoto: ImageView = itemView.findViewById(R.id.productPhoto)
         val productTitle: TextView = itemView.findViewById(R.id.productTitle)
@@ -51,6 +52,7 @@ class CartAdapter(private val cartItems: MutableList<CartItem>):
                 notifyItemChanged(position)
             }
         }
+
         // Handle delete item
         holder.deleteItem.setOnClickListener {
             cartItems.removeAt(position)  // Removes the item from the list

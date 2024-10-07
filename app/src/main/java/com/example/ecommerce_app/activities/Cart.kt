@@ -6,11 +6,9 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ecommerce_app.Data.CartItem
+import com.example.ecommerce_app.models.CartItem
 import com.example.ecommerce_app.R
 import com.example.ecommerce_app.adapters.CartAdapter
 
