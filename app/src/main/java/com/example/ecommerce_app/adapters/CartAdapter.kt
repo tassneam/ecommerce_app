@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce_app.models.CartItem
 import com.example.ecommerce_app.R
 
-class CartAdapter(private val cartItems: MutableList<CartItem>) :
-    RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class CartAdapter(
+    private val cartItems: MutableList<CartItem>,
+    private val onPriceUpdated: (Double) -> Unit  // A lambda function to update total price
+):RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+
 
     class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productPhoto: ImageView = itemView.findViewById(R.id.productPhoto)
@@ -31,35 +34,54 @@ class CartAdapter(private val cartItems: MutableList<CartItem>) :
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val currentItem = cartItems[position]
 
+
         // Bind data to the views
         holder.productPhoto.setImageResource(currentItem.photoResId)
         holder.productTitle.text = currentItem.title
-        holder.productPrice.text = "${currentItem.price} $"
+        holder.productPrice.text = "${currentItem.price * currentItem.quantity} $"  // Update price based on quantity
         holder.quantity.text = currentItem.quantity.toString()
 
         // Handle increase quantity
         holder.increaseQuantity.setOnClickListener {
             currentItem.quantity++
             holder.quantity.text = currentItem.quantity.toString()
-            notifyItemChanged(position)  // Update item
+            holder.productPrice.text =
+                "${currentItem.price * currentItem.quantity} $"  // Update price
+            // Notify the activity of the price change
+            onPriceUpdated(calculateTotalPrice())
         }
 
-        // Handle decrease quantity
-        holder.decreaseQuantity.setOnClickListener {
-            if (currentItem.quantity > 1) {
-                currentItem.quantity--
-                holder.quantity.text = currentItem.quantity.toString()
-                notifyItemChanged(position)
+            // Handle decrease quantity
+            holder.decreaseQuantity.setOnClickListener {
+                if (currentItem.quantity > 1) {
+                    currentItem.quantity--
+                    holder.quantity.text = currentItem.quantity.toString()
+                    holder.productPrice.text = "${currentItem.price * currentItem.quantity} $"  // Update price
+                    // Notify the activity of the price change
+                    onPriceUpdated(calculateTotalPrice())
             }
         }
 
-        // Handle delete item
-        holder.deleteItem.setOnClickListener {
-            cartItems.removeAt(position)  // Removes the item from the list
-            notifyItemRemoved(position)  // Notify the adapter that the item was removed
-            notifyItemRangeChanged(position, cartItems.size)  // Update the remaining items
+            // Handle delete item
+            holder.deleteItem.setOnClickListener {
+                cartItems.removeAt(position)  // Remove the item from the list
+                notifyItemRemoved(position)  // Notify the adapter that the item was removed
+                notifyItemRangeChanged(position, cartItems.size)  // Update remaining items
+
+                // Notify the activity of the price change
+                onPriceUpdated(calculateTotalPrice())
         }
     }
 
     override fun getItemCount() = cartItems.size
-}
+
+
+        // Function to calculate the total price of items in the cart
+        fun calculateTotalPrice(): Double {
+            var totalPrice = 0.0
+            for (item in cartItems) {
+                totalPrice += item.price * item.quantity
+            }
+            return totalPrice
+        }
+    }

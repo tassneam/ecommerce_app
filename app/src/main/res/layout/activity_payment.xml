@@ -165,7 +165,7 @@
                     android:id="@+id/total_amount_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/_250_0"
+                    android:text="0.00"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -177,8 +177,7 @@
                     android:text="@string/egy"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="7dp">
+                    android:textStyle="bold">
                 </TextView>
             </LinearLayout>
 

@@ -60,16 +60,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
     // ROOM
     val roomVersion = "2.6.1"
     implementation ("androidx.room:room-runtime:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
-
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation ("androidx.room:room-ktx:$roomVersion")
-
     // Life Cycle Arch
     val lifecycleVersion = "2.6.2"
     // ViewModel
