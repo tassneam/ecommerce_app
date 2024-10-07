@@ -2,8 +2,9 @@ package com.example.ecommerce_app.models
 
 
 data class CartItem(
-    val photoResId: Int,   // Resource ID for the product image
-    val title: String,     // Product title
-    val price: Double,     // Product price
-    var quantity: Int      // Product quantity
+    val id: String = "",
+    val title: String = "",
+    val imageUrl: String = "",
+    val price: Double = 0.0,
+    var quantity: Int = 1
 )

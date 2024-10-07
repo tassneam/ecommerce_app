@@ -17,6 +17,7 @@ import com.example.ecommerce_app.R
 import com.example.ecommerce_app.adapters.HomeCategoriesAdapter
 import com.example.ecommerce_app.adapters.ItemAdapter
 import com.example.ecommerce_app.databinding.FragmentHomeBinding
+import com.example.ecommerce_app.models.CartItem
 import com.example.ecommerce_app.models.Category
 import com.example.ecommerce_app.models.Item
 import com.google.firebase.database.DataSnapshot
@@ -65,14 +66,40 @@ class HomeFragment : Fragment() {
         loadCategories()
         loadBannerImage()
         itemList = ArrayList()
-        itemAdapter = ItemAdapter(requireContext(), itemList)
+        itemAdapter = ItemAdapter(requireContext(), itemList) { selectedItem ->
+            // Add item to cart in Firebase
+            addToCart(selectedItem)
+        }
         binding.recyclerViewCard.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         binding.recyclerViewCard.setHasFixedSize(true)
         binding.recyclerViewCard.adapter = itemAdapter
 
         getItemData()
     }
+    private fun addToCart(item: Item) {
+        val cartDatabase = FirebaseDatabase.getInstance().getReference("cartItems")
+        val cartItemId = cartDatabase.push().key // Generate a unique ID for the cart item
 
+        if (cartItemId != null) {
+            val cartItem = CartItem(
+                id = cartItemId,
+                title = item.title,
+                imageUrl = item.imageUrl,
+                price = item.price,
+                quantity = 1
+            )
+
+            cartDatabase.child(cartItemId).setValue(cartItem).addOnSuccessListener {
+                Toast.makeText(requireContext(), "Item added to cart", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener {
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to add item to cart: ${it.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
     private fun getItemData() {
         database = FirebaseDatabase.getInstance().getReference("item")
         database.addValueEventListener(object : ValueEventListener {

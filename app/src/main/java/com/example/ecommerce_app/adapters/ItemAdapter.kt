@@ -10,7 +10,8 @@ import com.example.ecommerce_app.activities.DetailsActivity
 import com.example.ecommerce_app.databinding.CardLayoutBinding
 import com.example.ecommerce_app.models.Item
 
-class ItemAdapter(var c: Context, var itemList: ArrayList<Item>) :
+class ItemAdapter(var c: Context, var itemList: ArrayList<Item>, private val onCartClick: (Item) -> Unit // Callback for cart icon click
+) :
     RecyclerView.Adapter<ItemAdapter.ItemHolder>() {
     inner class ItemHolder(val binding: CardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(item: Item) {
@@ -39,6 +40,13 @@ class ItemAdapter(var c: Context, var itemList: ArrayList<Item>) :
                 putExtra("ratingCount", newList.ratingCount.toString())
             }
             c.startActivity(intent)
+        }
+        with(holder.binding) {
+            this.item = item
+            // Handle cart icon click
+            cart.setOnClickListener {
+                onCartClick(newList)
+            }
         }
     }
 
