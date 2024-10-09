@@ -72,5 +72,4 @@ class language_setting : Fragment() {
         val language = sharedPreferences.getString("My_Language", "en")
         setLocale(language ?: "en")
     }
-
 }
