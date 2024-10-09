@@ -1,5 +1,6 @@
 package com.example.ecommerce_app.settings
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,13 +14,14 @@ import com.example.ecommerce_app.R
 import java.util.Locale
 
 class language_setting : Fragment() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
 
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.setting_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_setting, container, false)
         loadLanguagePreference()
 
         val languageMenu: ImageView = view.findViewById(R.id.language_menu)

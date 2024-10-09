@@ -44,8 +44,9 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.action_profileFragment -> {
-                    // Handle navigation for profileFragment
-                    // navController.navigate(R.id.profileFragment)
+                    if (navController.currentDestination?.id != R.id.settingFragment) {
+                        navController.navigate(R.id.settingFragment)
+                    }
                     true
                 }
                 else -> false

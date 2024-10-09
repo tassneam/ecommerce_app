@@ -15,22 +15,22 @@
     <string name="mastercard_logo" translatable="false">MasterCard Logo</string>
     <string name="visa_logo" translatable="false">Visa Logo</string>
     <string name="logo" translatable="false">Logo</string>
-<!--    //Splash Screen-->
+    <!--    //Splash Screen-->
     <string name="project_name" translatable="false">Project Name</string>
 
-<!--    //OnBoarding Screen-->
+    <!--    //OnBoarding Screen-->
     <string name="title1" translatable="false">The Right Address \nFor Shopping Anyday</string>
     <string name="get_started" translatable="false">Get Started</string>
     <string name="title2" translatable="false">It’s now very easy to reach the best quality \namong all the product on the Internet</string>
 
-<!--    //SignIn Screen-->
+    <!--    //SignIn Screen-->
     <string name="welcome_login_to_your_account" translatable="false">Welcome,\nLogin to your account</string>
     <string name="email_address" translatable="false">Enter your email address</string>
     <string name="password" translatable="false">Enter your password</string>
     <string name="login" translatable="false">Login</string>
     <string name="Sign_In" translatable="false">Not Registered Yet, Sign Up!</string>
 
-<!--    //SignUp Screen-->
+    <!--    //SignUp Screen-->
     <string name="welcome_sign_up_to_continue" translatable="false">Welcome,\nSign Up to continue</string>
     <string name="confirm_password" translatable="false">Confirm your password</string>
     <string name="sign_up" translatable="false">Sign Up</string>
