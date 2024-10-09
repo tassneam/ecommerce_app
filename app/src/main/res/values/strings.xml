@@ -1,5 +1,38 @@
 <resources>
-    <string name="app_name">ecommerce_app</string>
     <string name="english" translatable="false">English</string>"
     <string name="arabic" translatable="false">Arabic</string>
+    <string name="app_name">ecommerce_app</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="check_out" translatable="false">Check Out</string>
+    <string name="secure_payment" translatable="false">SECURE PAYMENT</string>
+    <string name="egy" translatable="false">EGP</string>
+    <string name="_250_0" translatable="false">250.0</string>
+    <string name="total_amount" translatable="false">TOTAL AMOUNT:</string>
+    <string name="cvv" translatable="false">CVV</string>
+    <string name="mm_yy" translatable="false">MM / YY</string>
+    <string name="card_number" translatable="false">CARD NUMBER</string>
+    <string name="paypal_logo" translatable="false">PayPal Logo</string>
+    <string name="mastercard_logo" translatable="false">MasterCard Logo</string>
+    <string name="visa_logo" translatable="false">Visa Logo</string>
+    <string name="logo" translatable="false">Logo</string>
+<!--    //Splash Screen-->
+    <string name="project_name" translatable="false">Project Name</string>
+
+<!--    //OnBoarding Screen-->
+    <string name="title1" translatable="false">The Right Address \nFor Shopping Anyday</string>
+    <string name="get_started" translatable="false">Get Started</string>
+    <string name="title2" translatable="false">It’s now very easy to reach the best quality \namong all the product on the Internet</string>
+
+<!--    //SignIn Screen-->
+    <string name="welcome_login_to_your_account" translatable="false">Welcome,\nLogin to your account</string>
+    <string name="email_address" translatable="false">Enter your email address</string>
+    <string name="password" translatable="false">Enter your password</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="Sign_In" translatable="false">Not Registered Yet, Sign Up!</string>
+
+<!--    //SignUp Screen-->
+    <string name="welcome_sign_up_to_continue" translatable="false">Welcome,\nSign Up to continue</string>
+    <string name="confirm_password" translatable="false">Confirm your password</string>
+    <string name="sign_up" translatable="false">Sign Up</string>
+    <string name="already_registered_sign_in" translatable="false">Already Registered, Sign In!</string>
 </resources>
