@@ -21,8 +21,7 @@
             android:layout_height="60dp"
             android:src="@drawable/person"
             android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop" />
 
         <!-- Profile Name -->
         <LinearLayout
@@ -158,6 +157,7 @@
             android:layout_weight="1"
             android:text="Notifications"
             android:textSize="20sp"/>
+
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
