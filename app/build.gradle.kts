@@ -48,6 +48,7 @@ android {
 dependencies {
 
     implementation(libs.firebase.database)
+    implementation(libs.firebase.auth)
     val nav_version = "2.7.5"
     implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -60,13 +61,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     // ROOM
     val roomVersion = "2.6.1"
     implementation ("androidx.room:room-runtime:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
+
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation ("androidx.room:room-ktx:$roomVersion")
+
     // Life Cycle Arch
     val lifecycleVersion = "2.6.2"
     // ViewModel
@@ -78,18 +82,6 @@ dependencies {
 
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.zeugmasolutions.localehelper:locale-helper-android:1.5.1")
 
-    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-firestore")
-    val lifecycle_version = "2.2.0"
-    //    call API
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-//dependency injection
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-}
-kapt {
-    correctErrorTypes = true
 }
