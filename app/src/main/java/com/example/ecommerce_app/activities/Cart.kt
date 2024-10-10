@@ -35,7 +35,7 @@ class Cart : AppCompatActivity() {
 
         // Initialize CartAdapter with onPriceUpdated lambda
         cartAdapter = CartAdapter(cartItemsList) { updatedTotalPrice ->
-            totalPriceTextView.text = "Total: $updatedTotalPrice $" // Update total price TextView
+            totalPriceTextView.text = " $updatedTotalPrice $" // Update total price TextView
         }
 
         cartRecyclerView.adapter = cartAdapter
@@ -78,6 +78,6 @@ class Cart : AppCompatActivity() {
 
     private fun updateTotalPrice() {
         val totalPrice = cartItemsList.sumOf { it.price * it.quantity }
-        totalPriceTextView.text = "Total: $totalPrice EGP"
+        totalPriceTextView.text = "$totalPrice EGP"
     }
 }

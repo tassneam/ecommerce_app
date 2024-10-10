@@ -67,6 +67,7 @@
 
         <!-- All Orders -->
         <LinearLayout
+            android:id="@+id/allOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -182,7 +183,7 @@
 
         <!-- Language -->
         <LinearLayout
-            android:id="@+id/lan"
+            android:id="@+id/language"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

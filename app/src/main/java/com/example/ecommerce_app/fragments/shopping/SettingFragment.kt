@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.ecommerce_app.activities.Cart
 import com.example.ecommerce_app.activities.SignInActivity
 import com.example.ecommerce_app.databinding.FragmentSettingBinding
 import com.google.firebase.Firebase
@@ -34,6 +35,13 @@ class SettingFragment : Fragment() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             requireActivity().finish()
+        }
+        binding.language.setOnClickListener {
+
+        }
+        binding.allOrders.setOnClickListener {
+            val intent = Intent(requireContext(), Cart::class.java)
+            startActivity(intent)
         }
     }
 }
