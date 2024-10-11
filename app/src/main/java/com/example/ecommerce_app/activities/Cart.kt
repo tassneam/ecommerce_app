@@ -1,9 +1,7 @@
 package com.example.ecommerce_app.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +14,6 @@ import com.google.firebase.database.*
 
 class Cart : AppCompatActivity() {
 
-    private lateinit var cartRecyclerView: RecyclerView
     private lateinit var cartAdapter: CartAdapter
     private val cartItemsList = mutableListOf<CartItem>()
     private lateinit var databaseReference: DatabaseReference
@@ -26,58 +23,46 @@ class Cart : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
-        // Initialize Firebase Database reference
-        databaseReference = FirebaseDatabase.getInstance().getReference("cartItems")
-
-        // Setup RecyclerView
-        cartRecyclerView = findViewById(R.id.cartRecyclerView)
-        totalPriceTextView = findViewById(R.id.totalPrice) // Assuming you have a TextView for total price
-
-        // Initialize CartAdapter with onPriceUpdated lambda
-        cartAdapter = CartAdapter(cartItemsList) { updatedTotalPrice ->
-            totalPriceTextView.text = " $updatedTotalPrice $" // Update total price TextView
-        }
-
-        cartRecyclerView.adapter = cartAdapter
-        cartRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        // Load cart items from Firebase
+        setupUI()
         loadCartItems()
+    }
 
-        // Checkout button
-        val checkoutButton = findViewById<Button>(R.id.checkout_btn)
-        checkoutButton.setOnClickListener {
-            val intent = Intent(this, Payment::class.java)
-            startActivity(intent)
+    private fun setupUI() {
+        totalPriceTextView = findViewById(R.id.totalPrice)
+
+        cartAdapter = CartAdapter(cartItemsList) { updatedTotalPrice ->
+            totalPriceTextView.text = String.format("%.2f EGP", updatedTotalPrice)
         }
 
-        // Back icon
-        val backIcon = findViewById<ImageView>(R.id.backIcon)
-        backIcon.setOnClickListener {
-            onBackPressed()
+        findViewById<RecyclerView>(R.id.cartRecyclerView).apply {
+            layoutManager = LinearLayoutManager(this@Cart)
+            adapter = cartAdapter
         }
+
+        findViewById<ImageView>(R.id.backIcon).setOnClickListener { onBackPressed() }
     }
 
     private fun loadCartItems() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("cartItems")
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                cartItemsList.clear() // Clear the existing list to avoid duplicates
+                cartItemsList.clear()
                 for (cartItemSnapshot in snapshot.children) {
                     val cartItem = cartItemSnapshot.getValue(CartItem::class.java)
                     cartItem?.let { cartItemsList.add(it) }
                 }
-                cartAdapter.notifyDataSetChanged() // Notify adapter about data changes
-                updateTotalPrice() // Update total price after loading items
+                cartAdapter.notifyDataSetChanged()
+                updateTotalPrice()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e("CartActivity", "Failed to load cart items: ${error.message}")
+                Log.e("Cart", "Failed to load cart items: ${error.message}")
             }
         })
     }
 
     private fun updateTotalPrice() {
         val totalPrice = cartItemsList.sumOf { it.price * it.quantity }
-        totalPriceTextView.text = "$totalPrice EGP"
+        totalPriceTextView.text = String.format("%.2f EGP", totalPrice)
     }
 }

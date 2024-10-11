@@ -1,10 +1,12 @@
 package com.example.ecommerce_app.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecommerce_app.R
@@ -77,13 +79,13 @@ class CartAdapter(
         // Handle delete item
         holder.deleteItem.setOnClickListener {
             val removedItemId = currentItem.id
-            cartItems.removeAt(position)  // Remove the item from the list
-            removeItemFromFirebase(removedItemId)  // Remove from Firebase
-            notifyItemRemoved(position)  // Notify the adapter that the item was removed
-            notifyItemRangeChanged(position, cartItems.size)  // Update remaining items
-            // Notify the activity of the price change
-            onPriceUpdated(calculateTotalPrice())
+            cartItems.removeAt(position)  // Remove the item from the local list
+            removeItemFromFirebase(removedItemId, holder.itemView.context)  // Pass context here
+            notifyItemRemoved(position)  // Notify RecyclerView
+            notifyItemRangeChanged(position, cartItems.size)  // Update the UI
+            onPriceUpdated(calculateTotalPrice())  // Update the price
         }
+
     }
 
     override fun getItemCount() = cartItems.size
@@ -94,9 +96,16 @@ class CartAdapter(
     }
 
     // Function to remove an item from Firebase
-    private fun removeItemFromFirebase(itemId: String) {
-        databaseReference.child(itemId).removeValue()
+    private fun removeItemFromFirebase(itemKey: String, context: Context) {
+        databaseReference.child(itemKey).removeValue()
+            .addOnSuccessListener {
+                Toast.makeText(context, "Item removed from Firebase", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(context, "Failed to remove item: ${exception.message}", Toast.LENGTH_SHORT).show()
+            }
     }
+
 
     // Function to calculate the total price of items in the cart
     fun calculateTotalPrice(): Double {
