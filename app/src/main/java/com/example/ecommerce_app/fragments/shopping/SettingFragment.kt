@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.ecommerce_app.R
 import com.example.ecommerce_app.activities.Cart
 import com.example.ecommerce_app.activities.SignInActivity
 import com.example.ecommerce_app.databinding.FragmentSettingBinding
@@ -42,6 +44,9 @@ class SettingFragment : Fragment() {
         binding.allOrders.setOnClickListener {
             val intent = Intent(requireContext(), Cart::class.java)
             startActivity(intent)
+        }
+        binding.editPersonalDetails.setOnClickListener {
+            findNavController().navigate(R.id.action_settingFragment_to_profileFragment)
         }
     }
 }
