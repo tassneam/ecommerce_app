@@ -3,6 +3,8 @@ package com.example.ecommerce_app.fragments.shopping
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,7 +40,7 @@ class HomeFragment : Fragment() {
         Category("Jeans", R.drawable.jeans),
         Category("See all", R.drawable.ic_plus)
     )
-
+    private var filteredCategories: MutableList<Category> = categories.toMutableList()
     lateinit var database: DatabaseReference
     private lateinit var itemList: ArrayList<Item>
     private lateinit var itemAdapter: ItemAdapter
@@ -75,31 +77,77 @@ class HomeFragment : Fragment() {
         binding.recyclerViewCard.adapter = itemAdapter
 
         getItemData()
+        binding.searchEditTxt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterCategories(s.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
+
     }
+
+    private fun filterCategories(query: String) {
+        filteredCategories.clear()
+        if (query.isEmpty()) {
+            filteredCategories.addAll(categories) // Show all categories if query is empty
+        } else {
+            val filtered = categories.filter { it.title.contains(query, ignoreCase = true) }
+            filteredCategories.addAll(filtered) // Add filtered categories
+        }
+        homeCategoriesAdapter.notifyDataSetChanged() // Notify the adapter to refresh the list
+    }
+
     private fun addToCart(item: Item) {
         val cartDatabase = FirebaseDatabase.getInstance().getReference("cartItems")
-        val cartItemId = cartDatabase.push().key // Generate a unique ID for the cart item
 
-        if (cartItemId != null) {
-            val cartItem = CartItem(
-                id = cartItemId,
-                title = item.title,
-                imageUrl = item.imageUrl,
-                price = item.price,
-                quantity = 1
-            )
+        // Check if the item already exists in the cart
+        cartDatabase.orderByChild("title").equalTo(item.title).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    // Item already exists, update its quantity
+                    for (cartItemSnapshot in snapshot.children) {
+                        val existingCartItem = cartItemSnapshot.getValue(CartItem::class.java)
+                        if (existingCartItem != null) {
+                            val newQuantity = existingCartItem.quantity + 1
+                            cartItemSnapshot.ref.child("quantity").setValue(newQuantity)
+                                .addOnSuccessListener {
+                                    Toast.makeText(requireContext(), "Item quantity updated", Toast.LENGTH_SHORT).show()
+                                }.addOnFailureListener {
+                                    Toast.makeText(requireContext(), "Failed to update item: ${it.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    }
+                } else {
+                    // Item doesn't exist, add it to the cart
+                    val cartItemId = cartDatabase.push().key
+                    if (cartItemId != null) {
+                        val newCartItem = CartItem(
+                            id = cartItemId,
+                            title = item.title,
+                            imageUrl = item.imageUrl,
+                            price = item.price,
+                            quantity = 1
+                        )
 
-            cartDatabase.child(cartItemId).setValue(cartItem).addOnSuccessListener {
-                Toast.makeText(requireContext(), "Item added to cart", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to add item to cart: ${it.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                        cartDatabase.child(cartItemId).setValue(newCartItem)
+                            .addOnSuccessListener {
+                                Toast.makeText(requireContext(), "Item added to cart", Toast.LENGTH_SHORT).show()
+                            }.addOnFailureListener {
+                                Toast.makeText(requireContext(), "Failed to add item to cart: ${it.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
             }
-        }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Failed to check cart: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
     private fun getItemData() {
         database = FirebaseDatabase.getInstance().getReference("item")
         database.addValueEventListener(object : ValueEventListener {
@@ -157,7 +205,7 @@ class HomeFragment : Fragment() {
         // Simulating a network delay
         Handler(Looper.getMainLooper()).postDelayed({
             // Initialize the adapter after data is "loaded"
-            homeCategoriesAdapter = HomeCategoriesAdapter(categories) { category ->
+            homeCategoriesAdapter = HomeCategoriesAdapter(filteredCategories) { category ->
                 when (category.title) {
                     "Sale" -> findNavController().navigate(R.id.action_homeFragment_to_saleFragment)
                     "Dresses" -> findNavController().navigate(R.id.action_homeFragment_to_dressesFragment)
