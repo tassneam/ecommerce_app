@@ -26,12 +26,15 @@ class SignUpActivity : AppCompatActivity() {
                 val intent = Intent(this, SignInActivity::class.java)
                 startActivity(intent)
             }
+
             binding.signUpBtn.setOnClickListener {
+                val username = binding.usernameEditText.text.toString()
+                val phone = binding.phoneEditText.text.toString()
                 val email = binding.emailEditText.text.toString()
                 val password = binding.passwordEditText.text.toString()
                 val confirmPassword = binding.confirmPasswordEditText.text.toString()
 
-                if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+                if (username.isNotEmpty() && phone.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
                     if (password == confirmPassword) {
 
                         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {

@@ -6,9 +6,11 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecommerce_app.databinding.ActivitySplashScreenBinding
+import com.example.ecommerce_app.fragments.shopping.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashScreen : AppCompatActivity() {
+
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var binding: ActivitySplashScreenBinding
 
@@ -21,10 +23,11 @@ class SplashScreen : AppCompatActivity() {
 
             val isLogin: Boolean = firebaseAuth.currentUser != null
 
-            val handler = Handler(Looper.myLooper()!!)
+            val handler = Handler(Looper.myLooper()!!
+            )
             handler.postDelayed({
                 if (isLogin) {
-                    val intent = Intent(this, OnBoardingActivity::class.java)
+                    val intent = Intent(this, HomeFragment::class.java)
                     startActivity(intent)
                     finish()
                 } else {

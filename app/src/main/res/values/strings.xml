@@ -14,6 +14,7 @@
     <string name="mastercard_logo">MasterCard Logo</string>
     <string name="visa_logo">Visa Logo</string>
     <string name="logo">Logo</string>
+
     //Splash Screen
     <string name="project_name">Project Name</string>
 
@@ -24,14 +25,40 @@
 
     //SignIn Screen
     <string name="welcome_login_to_your_account">Welcome,\nLogin to your account</string>
-    <string name="email_address">Enter your email address</string>
-    <string name="password">Enter your password</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
     <string name="Sign_In">Not Registered Yet, Sign Up!</string>
 
     //SignUp Screen
     <string name="welcome_sign_up_to_continue">Welcome,\nSign Up to continue</string>
-    <string name="confirm_password">Confirm your password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="already_registered_sign_in">Already Registered, Sign In!</string>
+    <string name="enter_your_name">Username</string>
+    <string name="phone_number">Phone Number</string>
+
+    //Forgot Password Screen
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="forgot_password_desc">Enter the email address associated with your account.</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="email_required">Please enter a valid email address.</string>
+    <string name="reset_email_sent"> Reset email sent.</string>
+
+
+    //Email Verification Screen
+    <string name="emailVerification">Get your code</string>
+    <string name="code_sent_to_your_email">Code sent to your email</string>
+    <string name="verification_desc">Please, enter the code sent to your email address.</string>
+    <string name="verify">Verify</string>
+    <string name="email_verification">Email Verification</string>
+
+    //New Password Screen
+    <string name="newPasswordTitle">Enter new password</string>
+    <string name="newPasswordDesc">Your new password must be different from previous used passwords.</string>
+    <string name="new_Password">New Password</string>
+    <string name="confirm_new_password">Confirm new Password</string>
+    <string name="confirm">Confirm</string>
+
 </resources>
