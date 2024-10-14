@@ -6,7 +6,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecommerce_app.databinding.ActivitySplashScreenBinding
-import com.example.ecommerce_app.fragments.shopping.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashScreen : AppCompatActivity() {
@@ -19,26 +18,25 @@ class SplashScreen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-            init()
+        init()
 
-            val isLogin: Boolean = firebaseAuth.currentUser != null
+        val isLogin: Boolean = firebaseAuth.currentUser != null
 
-            val handler = Handler(Looper.myLooper()!!
-            )
-            handler.postDelayed({
-                if (isLogin) {
-                    val intent = Intent(this, HomeFragment::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    val intent = Intent(this, OnBoardingActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-            }, 2000)
-        }
-
-        private fun init() {
-            firebaseAuth = FirebaseAuth.getInstance()
-        }
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            if (isLogin) {
+                // Start MainActivity instead of HomeFragment
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, OnBoardingActivity::class.java)
+                startActivity(intent)
+            }
+            finish() // Close SplashScreen
+        }, 2000)
     }
+
+    private fun init() {
+        firebaseAuth = FirebaseAuth.getInstance()
+    }
+}
