@@ -1,6 +1,7 @@
 package com.example.ecommerce_app.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -18,9 +19,14 @@ class Payment : AppCompatActivity() {
 
         // Get the total price from the Intent
         val totalPrice = intent.getDoubleExtra("total_price", 0.0)
+        Log.d("PaymentActivity", "Total Price: $totalPrice")
+
+        // Display the total price in the total_amount_value TextView using string resource
+        val totalAmountValue = findViewById<TextView>(R.id.total_amount_value)
+         // Use the resource string
+        totalAmountValue.text = getString(R.string.total_amount_format, totalPrice)
 
         // Display the total price in the total_amount_value TextView
-        val totalAmountValue = findViewById<TextView>(R.id.total_amount_value)
         totalAmountValue.text = String.format("%.2f", totalPrice) + " EGP"  // Format to 2 decimal places
 
         //back icon

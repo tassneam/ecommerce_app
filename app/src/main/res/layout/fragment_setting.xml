@@ -7,6 +7,7 @@
     android:background="@drawable/cardbox_background">
     <!-- Profile Section -->
     <LinearLayout
+        android:id="@+id/myprofile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -14,6 +15,10 @@
         android:background="@android:color/white"
         android:layout_marginBottom="16dp"
         android:gravity="center_vertical">
+        <!-- Profile Picture with Edit Icon -->
+        <FrameLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp">
         <!-- Profile Picture -->
         <ImageView
             android:id="@+id/profile_image"
@@ -21,7 +26,9 @@
             android:layout_height="60dp"
             android:src="@drawable/person"
             android:layout_marginEnd="16dp"
+            android:contentDescription="Profile picture"
             android:scaleType="centerCrop" />
+        </FrameLayout>
 
         <!-- Profile Name -->
         <LinearLayout
@@ -36,16 +43,9 @@
                 android:text="Mariam Mohamed"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/edit_personal_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit personal details"
-                android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/darker_gray"/>
+                android:layout_marginStart="10dp"/>
+
 
         </LinearLayout>
     </LinearLayout>

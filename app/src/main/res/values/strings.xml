@@ -1,64 +1,72 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ecommerce_app</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="check_out">Check Out</string>
-    <string name="secure_payment">SECURE PAYMENT</string>
-    <string name="egy">EGY</string>
-    <string name="_250_0">250.0</string>
-    <string name="total_amount">TOTAL AMOUNT:</string>
-    <string name="cvv">CVV</string>
-    <string name="mm_yy">MM / YY</string>
-    <string name="card_number">CARD NUMBER</string>
-    <string name="paypal_logo">PayPal Logo</string>
-    <string name="mastercard_logo">MasterCard Logo</string>
-    <string name="visa_logo">Visa Logo</string>
-    <string name="logo">Logo</string>
+
+    <string name ="hello_blank_fragment"
+        tools:ignore="MissingTranslation">Hello blank fragment</string>
+    <string name="check_out"
+        tools:ignore="MissingTranslation">Check Out</string>
+    <string name="secure_payment" tools:ignore="MissingTranslation">SECURE PAYMENT</string>
+
+    <string name="egy" tools:ignore="MissingTranslation">EGY</string>
+    <string name="_250_0" tools:ignore="MissingTranslation">250.0</string>
+    <string name="total_amount" tools:ignore="MissingTranslation">TOTAL AMOUNT:</string>
+    <string name="cvv" tools:ignore="MissingTranslation">CVV</string>
+    <string name="mm_yy" tools:ignore="MissingTranslation">MM / YY</string>
+    <string name="card_number" tools:ignore="MissingTranslation">CARD NUMBER</string>
+    <string name="paypal_logo" tools:ignore="MissingTranslation">PayPal Logo</string>
+    <string name="mastercard_logo" tools:ignore="MissingTranslation">MasterCard Logo</string>
+    <string name="visa_logo" tools:ignore="MissingTranslation">Visa Logo</string>
+    <string name="logo" tools:ignore="MissingTranslation">Logo</string>
 
     //Splash Screen
-    <string name="project_name">Project Name</string>
+    <string name="project_name" tools:ignore="MissingTranslation">Project Name</string>
 
     //OnBoarding Screen
-    <string name="title1">The Right Address \nFor Shopping Anyday</string>
-    <string name="get_started">Get Started</string>
-    <string name="title2">It’s now very easy to reach the best quality \namong all the product on the Internet</string>
+    <string name="title1" tools:ignore="MissingTranslation">The Right Address \nFor Shopping Anyday</string>
+    <string name="get_started" tools:ignore="MissingTranslation">Get Started</string>
+    <string name="title2" tools:ignore="MissingTranslation">It’s now very easy to reach the best quality \namong all the product on the Internet</string>
 
     //SignIn Screen
-    <string name="welcome_login_to_your_account">Welcome,\nLogin to your account</string>
-    <string name="email_address">Email Address</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="Sign_In">Not Registered Yet, Sign Up!</string>
+    <string name="welcome_login_to_your_account" tools:ignore="MissingTranslation">Welcome,\nLogin to your account</string>
+    <string name="login" tools:ignore="MissingTranslation">Login</string>
+    <string name="forgot_password" tools:ignore="MissingTranslation">Forgot Password?</string>
+    <string name="Sign_In" tools:ignore="MissingTranslation">Not Registered Yet, Sign Up!</string>
 
     //SignUp Screen
-    <string name="welcome_sign_up_to_continue">Welcome,\nSign Up to continue</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="already_registered_sign_in">Already Registered, Sign In!</string>
-    <string name="enter_your_name">Username</string>
-    <string name="phone_number">Phone Number</string>
+    <string name="welcome_sign_up_to_continue" tools:ignore="MissingTranslation">Welcome! Sign up to continue.</string>
+    <string name="username_helper_text" tools:ignore="MissingTranslation">Enter your username</string>
+    <string name="enter_your_name" tools:ignore="MissingTranslation">Enter your name</string>
+    <string name="phone_number" tools:ignore="MissingTranslation">Phone Number</string>
+    <string name="email_address" tools:ignore="MissingTranslation">Email Address</string>
+    <string name="password" tools:ignore="MissingTranslation">Password</string>
+    <string name="confirm_password" tools:ignore="MissingTranslation">Confirm Password</string>
+    <string name="sign_up" tools:ignore="MissingTranslation">Sign Up</string>
+    <string name="already_registered_sign_in" tools:ignore="MissingTranslation">Already registered? Sign In</string>
+    <string name="empty_fields_error" tools:ignore="MissingTranslation">Please fill in all fields</string>
+    <string name="passwords_do_not_match" tools:ignore="MissingTranslation">Passwords do not match</string>
 
     //Forgot Password Screen
-    <string name="forgot_password_title">Forgot Password</string>
-    <string name="forgot_password_desc">Enter the email address associated with your account.</string>
-    <string name="reset_password">Reset Password</string>
-    <string name="email_required">Please enter a valid email address.</string>
-    <string name="reset_email_sent"> Reset email sent.</string>
+    <string name="forgot_password_title" tools:ignore="MissingTranslation">Forgot Password</string>
+    <string name="forgot_password_desc" tools:ignore="MissingTranslation">Enter the email address associated with your account.</string>
+    <string name="reset_password" tools:ignore="MissingTranslation">Reset Password</string>
+    <string name="email_required" tools:ignore="MissingTranslation">Please enter a valid email address.</string>
+    <string name="reset_email_sent" tools:ignore="MissingTranslation"> Reset email sent.</string>
 
 
     //Email Verification Screen
-    <string name="emailVerification">Get your code</string>
-    <string name="code_sent_to_your_email">Code sent to your email</string>
-    <string name="verification_desc">Please, enter the code sent to your email address.</string>
-    <string name="verify">Verify</string>
-    <string name="email_verification">Email Verification</string>
+    <string name="emailVerification" tools:ignore="MissingTranslation">Get your code</string>
+    <string name="code_sent_to_your_email" tools:ignore="MissingTranslation">Code sent to your email</string>
+    <string name="verification_desc" tools:ignore="MissingTranslation">Please, enter the code sent to your email address.</string>
+    <string name="verify" tools:ignore="MissingTranslation">Verify</string>
+    <string name="email_verification" tools:ignore="MissingTranslation">Email Verification</string>
 
     //New Password Screen
-    <string name="newPasswordTitle">Enter new password</string>
-    <string name="newPasswordDesc">Your new password must be different from previous used passwords.</string>
-    <string name="new_Password">New Password</string>
-    <string name="confirm_new_password">Confirm new Password</string>
-    <string name="confirm">Confirm</string>
+    <string name="newPasswordTitle" tools:ignore="MissingTranslation">Enter new password</string>
+    <string name="newPasswordDesc" tools:ignore="MissingTranslation">Your new password must be different from previous used passwords.</string>
+    <string name="new_Password" tools:ignore="MissingTranslation">New Password</string>
+    <string name="confirm_new_password" tools:ignore="MissingTranslation">Confirm new Password</string>
+    <string name="confirm" tools:ignore="MissingTranslation">Confirm</string>
+    //payment
+    <string name="total_amount_format" tools:ignore="MissingTranslation">%1$.2f EGP</string>
 
 </resources>

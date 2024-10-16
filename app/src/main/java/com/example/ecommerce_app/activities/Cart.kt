@@ -1,7 +1,9 @@
 package com.example.ecommerce_app.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -23,10 +25,20 @@ class Cart : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
-        setupUI()
-        loadCartItems()
-    }
+    // Initialize totalPriceTextView here
+    totalPriceTextView = findViewById(R.id.totalPrice)
 
+    val checkoutBtn = findViewById<Button>(R.id.checkout_btn)
+    checkoutBtn.setOnClickListener {
+        // Retrieve the total price value from the TextView and pass it to the Payment activity
+        val totalPrice = totalPriceTextView.text.toString().replace(" EGP", "").toDouble()
+        val intent = Intent(this, Payment::class.java)
+        intent.putExtra("total_price", totalPrice)
+        startActivity(intent)
+    }
+    setupUI()
+    loadCartItems()
+}
     private fun setupUI() {
         totalPriceTextView = findViewById(R.id.totalPrice)
 
