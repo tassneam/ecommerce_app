@@ -130,5 +130,10 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-storage")
 
+    //payment implementaion
+    // Add OkHttp for network requests
+    implementation (libs.okhttp)
+    implementation (libs.gson) // For JSON parsing
+
 
 }
