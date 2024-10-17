@@ -43,9 +43,6 @@ class DressesFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.sort.setOnClickListener {
-            showSortOptions(it)
-        }
         itemList = ArrayList()
         itemAdapter = ItemAdapter(requireContext(), itemList) { selectedItem ->
             // Add item to cart in Firebase
@@ -100,33 +97,5 @@ class DressesFragment : Fragment() {
             }
 
         })
-    }
-    private fun showSortOptions(view: View) {
-        val popupMenu = PopupMenu(requireContext(), view)
-        popupMenu.inflate(R.menu.sort_menu)
-
-        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-            when (item.itemId) {
-                R.id.sort_high_to_low -> {
-                    sortDressesByPriceHighToLow()
-                    true
-                }
-                R.id.sort_low_to_high -> {
-                    sortDressesByPriceLowToHigh()
-                    true
-                }
-                else -> false
-            }
-        }
-        popupMenu.show()
-    }
-
-    private fun sortDressesByPriceHighToLow() {
-        // Implement sorting logic here
-        // E.g., update your RecyclerView adapter with sorted data
-    }
-    private fun sortDressesByPriceLowToHigh() {
-        // Implement sorting logic here
-        // E.g., update your RecyclerView adapter with sorted data
     }
 }

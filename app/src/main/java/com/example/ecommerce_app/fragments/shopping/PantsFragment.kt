@@ -42,9 +42,6 @@ class PantsFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.sort.setOnClickListener {
-            showSortOptions(it)
-        }
 
         itemList = ArrayList()
         itemAdapter = ItemAdapter(requireContext(), itemList) { selectedItem ->
@@ -101,32 +98,5 @@ class PantsFragment : Fragment() {
         })
     }
 
-    private fun showSortOptions(view: View) {
-        val popupMenu = PopupMenu(requireContext(), view)
-        popupMenu.inflate(R.menu.sort_menu)
 
-        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-            when (item.itemId) {
-                R.id.sort_high_to_low -> {
-                    sortPantsByPriceHighToLow()
-                    true
-                }
-                R.id.sort_low_to_high -> {
-                    sortPantsByPriceLowToHigh()
-                    true
-                }
-                else -> false
-            }
-        }
-        popupMenu.show()
-    }
-
-    private fun sortPantsByPriceHighToLow() {
-        // Implement sorting logic here
-        // E.g., update your RecyclerView adapter with sorted data
-    }
-    private fun sortPantsByPriceLowToHigh() {
-        // Implement sorting logic here
-        // E.g., update your RecyclerView adapter with sorted data
-    }
 }

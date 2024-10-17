@@ -1,8 +1,12 @@
 package com.example.ecommerce_app.fragments.shopping
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -27,6 +31,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.Locale
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -45,6 +50,9 @@ class HomeFragment : Fragment() {
     private lateinit var itemList: ArrayList<Item>
     private lateinit var itemAdapter: ItemAdapter
 
+    companion object {
+        private const val REQUEST_CODE_SPEECH_INPUT = 100
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,9 +94,34 @@ class HomeFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {}
         })
+        // Set up mic icon click listener
+        binding.mic.setOnClickListener {
+            startVoiceInput()
+        }
+    }
+    // Function to start voice input
+    private fun startVoiceInput() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak something...")
 
+        try {
+            startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(requireContext(), "Speech recognition is not supported on this device", Toast.LENGTH_SHORT).show()
+        }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_SPEECH_INPUT && resultCode == Activity.RESULT_OK && data != null) {
+            val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            if (!result.isNullOrEmpty()) {
+                binding.searchEditTxt.setText(result[0])
+            }
+        }
+    }
     private fun filterCategories(query: String) {
         filteredCategories.clear()
         if (query.isEmpty()) {

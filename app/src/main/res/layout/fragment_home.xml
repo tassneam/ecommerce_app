@@ -67,18 +67,14 @@
                     android:layout_height="match_parent" />
 
                 <ImageView
+                    android:id="@+id/mic"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/circle_shape"
                     android:src="@drawable/ic_mic" />
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/circle_shape"
-                    android:src="@drawable/ic_notifications" />
+
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

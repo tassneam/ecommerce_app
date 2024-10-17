@@ -99,7 +99,7 @@ class CartAdapter(
     private fun removeItemFromFirebase(itemKey: String, context: Context) {
         databaseReference.child(itemKey).removeValue()
             .addOnSuccessListener {
-                Toast.makeText(context, "Item removed from Firebase", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Item removed from Cart", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(context, "Failed to remove item: ${exception.message}", Toast.LENGTH_SHORT).show()
