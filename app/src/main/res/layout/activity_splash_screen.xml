@@ -29,7 +29,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="148dp"
         android:background="@color/white"
-        android:src="@drawable/onboarding"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,21 +37,21 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
         app:layout_constraintTop_toBottomOf="@+id/guideline_top" />
 
-    <TextView
-        android:id="@+id/projectName"
-        style="@style/Widget.Material3.Snackbar.TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/project_name"
-        android:textAlignment="center"
-        android:textColor="@color/purple"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintTop_toTopOf="@+id/guideline_bottom"
-        tools:ignore="MissingConstraints">
-    </TextView>
+<!--    <TextView-->
+<!--        android:id="@+id/projectName"-->
+<!--        style="@style/Widget.Material3.Snackbar.TextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/project_name"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/purple"-->
+<!--        android:textSize="30dp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/logo"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/guideline_bottom"-->
+<!--        tools:ignore="MissingConstraints">-->
+<!--    </TextView>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
