@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?><resources>
+    <string name="app_name">"المتجر الالكتروني "</string>    <string name="hello_blank_fragment">مرحبا</string>
+    <string name="check_out">"الدفع "</string>    <string name="secure_payment">الدفع الآمن</string>
+    <string name="egy">مصر</string>    <string name="_250_0">250</string>
+    <string name="total_amount">المبلغ الإجمالي:</string>    <string name="cvv">CVV</string>
+    <string name="mm_yy">MM / YY</string>    <string name="card_number">"رقم البطاقة "</string>
+    <string name="paypal_logo">"شعار باي بال "</string>    <string name="mastercard_logo">شعار ماستركارد</string>
+    <string name="visa_logo">"شعار التأشيرة "</string>    <string name="logo">الشعار</string>
+    <string name="project_name">"اسم المشروع "</string>    <string name="title1">"الاختيار الافضل لك "</string>
+    <string name="get_started">"ابدأ "</string>    <string name="title2">أصبح من السهل جدًا الآن الوصول إلى أفضل جودة  من بين جميع المنتجات على شبكة الإنترنت</string>
+    <string name="welcome_login_to_your_account">مرحباً، تسجيل الدخول إلى حسابك</string>    <string name="login">تسجيل الدخول</string>
+    <string name="forgot_password">هل نسيت كلمة السر؟</string>    <string name="Sign_In">لم يتم التسجيل بعد، قم بالتسجيل!</string>
+    <string name="welcome_sign_up_to_continue">مرحباً! قم بالتسجيل للمتابعة.</string>    <string name="username_helper_text">أدخل اسم المستخدم الخاص بك</string>
+    <string name="enter_your_name">أدخل اسمك</string>    <string name="phone_number">رقم التليفون</string>
+    <string name="email_address">عنوان البريد الإلكتروني</string>    <string name="password">كلمة المرور</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>    <string name="sign_up">"الدخول الي ايميلك "</string>
+    <string name="already_registered_sign_in">مسجلة بالفعل؟ تسجيل الدخول</string>    <string name="empty_fields_error">يرجى ملء جميع الحقول</string>
+    <string name="passwords_do_not_match">كلمات المرور غير متطابقة</string>    <string name="forgot_password_title">هل نسيت كلمة السر</string>
+    <string name="forgot_password_desc">أدخل عنوان البريد الإلكتروني المرتبط بحسابك.</string>    <string name="reset_password">إعادة تعيين كلمة المرور</string>
+    <string name="email_required">يرجى إدخال عنوان بريد إلكتروني صالح.</string>    <string name="reset_email_sent">إعادة تعيين البريد الإلكتروني المرسل.</string>
+    <string name="emailVerification">احصل على الرمز الخاص بك</string>    <string name="code_sent_to_your_email">تم إرسال الرمز إلى بريدك الإلكتروني</string>
+    <string name="verification_desc">من فضلك قم بإدخال الرمز المرسل إلى عنوان بريدك الإلكتروني.</string>    <string name="verify">يؤكد</string>
+    <string name="email_verification">التحقق من البريد الإلكتروني</string>    <string name="newPasswordTitle">أدخل كلمة المرور الجديدة</string>
+    <string name="newPasswordDesc">يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمات المرور المستخدمة سابقًا.</string>    <string name="new_Password">كلمة المرور الجديدة</string>
+    <string name="confirm_new_password">تأكيد كلمة المرور الجديدة</string>    <string name="confirm">تأكيد</string>
+    <string name="mariam_mohamed">مريم محمد</string>    <string name="edit_personal_details">تعديل الملف الشخصي</string>
+    <string name="orders">المشتريات</string>    <string name="all_orders">كل المشتريات</string>
+    <string name="billing_and_addresses">الفاتوره والعنوان</string>    <string name="notifications">الاشعارات</string>
+    <string name="Notifications">الاشعارات</string>    <string name="regional">الاعدادات الاقليميه</string>
+    <string name="language">اللغه</string>    <string name="logout">تسجيل خروج</string>
+</resources>

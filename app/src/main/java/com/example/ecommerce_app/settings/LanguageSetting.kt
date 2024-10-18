@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import com.example.ecommerce_app.R
 import java.util.Locale
 
-class language_setting : Fragment() {
+class LanguageSetting : Fragment() {
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater,
