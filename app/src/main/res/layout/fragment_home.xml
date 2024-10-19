@@ -41,7 +41,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="Search anything"
+                        android:hint="@string/SearchAnything"
                         android:paddingStart="20dp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:text="Popular products"
+                    android:text="@string/PopularProducts"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />

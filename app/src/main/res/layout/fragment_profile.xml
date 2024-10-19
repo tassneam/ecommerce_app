@@ -67,7 +67,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update Your Profile:"
+            android:text="@string/update_your_profile"
             android:textSize="16sp"
             android:textColor="@color/purple"
             android:textStyle="bold"
@@ -75,7 +75,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User Name"
+            android:text="@string/user_name"
             android:textSize="16sp"
             android:textColor="#000000" />
 
@@ -83,7 +83,7 @@
             android:id="@+id/mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="New User Name"
+            android:hint="@string/new_user_name"
             android:textSize="16sp"
             android:textColor="#808080"
             android:layout_marginBottom="16dp" />
@@ -91,7 +91,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E-mail Address"
+            android:text="@string/email_address"
             android:textSize="16sp"
             android:textColor="#000000" />
 
@@ -99,7 +99,7 @@
             android:id="@+id/tell"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="New User Mail"
+            android:hint="@string/new_email_address"
             android:textSize="16sp"
             android:textColor="#808080"
             android:layout_marginBottom="16dp" />
@@ -107,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="@string/password"
             android:textSize="16sp"
             android:textColor="#000000" />
 
@@ -115,7 +115,7 @@
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="New Password"
+            android:hint="@string/new_Password"
             android:textSize="16sp"
             android:textColor="#808080"
             android:layout_marginBottom="16dp" />
@@ -125,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="update"
+        android:text="@string/update"
         android:textSize="20dp"
         android:backgroundTint="@color/purple"
         android:layout_margin="5dp">

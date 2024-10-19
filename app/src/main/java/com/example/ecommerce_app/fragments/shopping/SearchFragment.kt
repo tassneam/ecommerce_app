@@ -19,14 +19,8 @@ import com.example.ecommerce_app.models.Category
 class SearchFragment : Fragment() {
     lateinit var binding: FragmentSearchBinding
     lateinit var categoryAdapter: CategoryAdapter
-    private var categories: List<Category> = listOf(
-        Category("Sale", R.drawable.sale),
-        Category("Dresses", R.drawable.dress),
-        Category("T-shirts", R.drawable.tshirt),
-        Category("Pants", R.drawable.pants),
-        Category("Jeans", R.drawable.jeans)
-    )
-    private var filteredCategories: MutableList<Category> = categories.toMutableList()
+    private var filteredCategories: MutableList<Category> = mutableListOf()
+    private lateinit var categories: List<Category> // Moved initialization to onViewCreated
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,15 +33,25 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialize categories from string resources
+        categories = listOf(
+            Category(getString(R.string.category_sale), R.drawable.sale),
+            Category(getString(R.string.category_dresses), R.drawable.dress),
+            Category(getString(R.string.category_tshirts), R.drawable.tshirt),
+            Category(getString(R.string.category_pants), R.drawable.pants),
+            Category(getString(R.string.category_jeans), R.drawable.jeans)
+        )
+        filteredCategories.addAll(categories)
+
         // Setup the RecyclerView with the filtered categories
         binding.recyclerViewCategoriescards.layoutManager = GridLayoutManager(context, 2)
         categoryAdapter = CategoryAdapter(filteredCategories) { category ->
             when (category.title) {
-                "Sale" -> findNavController().navigate(R.id.action_searchFragment_to_saleFragment)
-                "Dresses" -> findNavController().navigate(R.id.action_searchFragment_to_dressesFragment)
-                "T-shirts" -> findNavController().navigate(R.id.action_searchFragment_to_tshirtsFragment)
-                "Pants" -> findNavController().navigate(R.id.action_searchFragment_to_pantsFragment)
-                "Jeans" -> findNavController().navigate(R.id.action_searchFragment_to_jeansFragment)
+                getString(R.string.category_sale) -> findNavController().navigate(R.id.action_searchFragment_to_saleFragment)
+                getString(R.string.category_dresses) -> findNavController().navigate(R.id.action_searchFragment_to_dressesFragment)
+                getString(R.string.category_tshirts) -> findNavController().navigate(R.id.action_searchFragment_to_tshirtsFragment)
+                getString(R.string.category_pants) -> findNavController().navigate(R.id.action_searchFragment_to_pantsFragment)
+                getString(R.string.category_jeans) -> findNavController().navigate(R.id.action_searchFragment_to_jeansFragment)
             }
         }
         binding.recyclerViewCategoriescards.adapter = categoryAdapter

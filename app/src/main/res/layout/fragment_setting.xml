@@ -40,7 +40,7 @@
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mariam Mohamed"
+                android:text="@string/mariam_mohamed"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Orders"
+        android:text="@string/orders"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -84,7 +84,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Cart"
+                android:text="@string/MyCart"
                 android:textSize="20sp"/>
         </LinearLayout>
 
@@ -105,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Track Order"
+                android:text="@string/TrackOrder"
                 android:textSize="20sp"/>
         </LinearLayout>
 
@@ -126,7 +126,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Billing And Addresses"
+                android:text="@string/billing_and_addresses"
                 android:textSize="20sp"/>
         </LinearLayout>
 
@@ -137,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Notifications"
+        android:text="@string/notifications"
         android:textSize="16sp"
         android:textStyle="bold" />
     <LinearLayout
@@ -157,7 +157,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Notifications"
+            android:text="@string/notifications"
             android:textSize="20sp"/>
 
         <Switch
@@ -171,7 +171,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Regional"
+        android:text="@string/regional"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -200,7 +200,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Language"
+                android:text="@string/language"
                 android:textSize="20sp"
                 android:layout_weight="1"/>
             <ImageView
@@ -230,7 +230,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Logout"
+                android:text="@string/logout"
                 android:textSize="20sp"/>
         </LinearLayout>
 

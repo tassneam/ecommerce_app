@@ -37,15 +37,9 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeCategoriesAdapter: HomeCategoriesAdapter
 
-    private val categories = listOf(
-        Category("Sale", R.drawable.sale),
-        Category("Dresses", R.drawable.dress),
-        Category("T-shirts", R.drawable.tshirt),
-        Category("Pants", R.drawable.pants),
-        Category("Jeans", R.drawable.jeans),
-        Category("See all", R.drawable.ic_plus)
-    )
-    private var filteredCategories: MutableList<Category> = categories.toMutableList()
+    private lateinit var categories: List<Category>
+    private var filteredCategories: MutableList<Category> = mutableListOf()
+
     lateinit var database: DatabaseReference
     private lateinit var itemList: ArrayList<Item>
     private lateinit var itemAdapter: ItemAdapter
@@ -53,6 +47,7 @@ class HomeFragment : Fragment() {
     companion object {
         private const val REQUEST_CODE_SPEECH_INPUT = 100
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +60,17 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.searchEditTxt.isCursorVisible = false
 
+        // Initialize the categories after the view is created
+        categories = listOf(
+            Category(getString(R.string.category_sale), R.drawable.sale),
+            Category(getString(R.string.category_dresses), R.drawable.dress),
+            Category(getString(R.string.category_tshirts), R.drawable.tshirt),
+            Category(getString(R.string.category_pants), R.drawable.pants),
+            Category(getString(R.string.category_jeans), R.drawable.jeans),
+            Category(getString(R.string.category_see_all), R.drawable.ic_plus)
+        )
+        filteredCategories.addAll(categories)
+
         // Show progress bar
         binding.progressBarCategories.visibility = View.VISIBLE
         binding.recyclerViewCategories.visibility = View.GONE
@@ -75,9 +81,9 @@ class HomeFragment : Fragment() {
 
         loadCategories()
         loadBannerImage()
+
         itemList = ArrayList()
         itemAdapter = ItemAdapter(requireContext(), itemList) { selectedItem ->
-            // Add item to cart in Firebase
             addToCart(selectedItem)
         }
         binding.recyclerViewCard.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
@@ -85,6 +91,7 @@ class HomeFragment : Fragment() {
         binding.recyclerViewCard.adapter = itemAdapter
 
         getItemData()
+
         binding.searchEditTxt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -94,11 +101,13 @@ class HomeFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {}
         })
+
         // Set up mic icon click listener
         binding.mic.setOnClickListener {
             startVoiceInput()
         }
     }
+
     // Function to start voice input
     private fun startVoiceInput() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -122,63 +131,60 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     private fun filterCategories(query: String) {
         filteredCategories.clear()
         if (query.isEmpty()) {
-            filteredCategories.addAll(categories) // Show all categories if query is empty
+            filteredCategories.addAll(categories)
         } else {
             val filtered = categories.filter { it.title.contains(query, ignoreCase = true) }
-            filteredCategories.addAll(filtered) // Add filtered categories
+            filteredCategories.addAll(filtered)
         }
-        homeCategoriesAdapter.notifyDataSetChanged() // Notify the adapter to refresh the list
+        homeCategoriesAdapter.notifyDataSetChanged()
     }
 
     private fun addToCart(item: Item) {
         val cartDatabase = FirebaseDatabase.getInstance().getReference("cartItems")
-
-        // Check if the item already exists in the cart
-        cartDatabase.orderByChild("title").equalTo(item.title).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    // Item already exists, update its quantity
-                    for (cartItemSnapshot in snapshot.children) {
-                        val existingCartItem = cartItemSnapshot.getValue(CartItem::class.java)
-                        if (existingCartItem != null) {
-                            val newQuantity = existingCartItem.quantity + 1
-                            cartItemSnapshot.ref.child("quantity").setValue(newQuantity)
+        cartDatabase.orderByChild("title").equalTo(item.title)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (cartItemSnapshot in snapshot.children) {
+                            val existingCartItem = cartItemSnapshot.getValue(CartItem::class.java)
+                            if (existingCartItem != null) {
+                                val newQuantity = existingCartItem.quantity + 1
+                                cartItemSnapshot.ref.child("quantity").setValue(newQuantity)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(requireContext(), "Item quantity updated", Toast.LENGTH_SHORT).show()
+                                    }.addOnFailureListener {
+                                        Toast.makeText(requireContext(), "Failed to update item: ${it.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                        }
+                    } else {
+                        val cartItemId = cartDatabase.push().key
+                        if (cartItemId != null) {
+                            val newCartItem = CartItem(
+                                id = cartItemId,
+                                title = item.title,
+                                imageUrl = item.imageUrl,
+                                price = item.price,
+                                quantity = 1
+                            )
+                            cartDatabase.child(cartItemId).setValue(newCartItem)
                                 .addOnSuccessListener {
-                                    Toast.makeText(requireContext(), "Item quantity updated", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireContext(), "Item added to cart", Toast.LENGTH_SHORT).show()
                                 }.addOnFailureListener {
-                                    Toast.makeText(requireContext(), "Failed to update item: ${it.message}", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireContext(), "Failed to add item to cart: ${it.message}", Toast.LENGTH_SHORT).show()
                                 }
                         }
                     }
-                } else {
-                    // Item doesn't exist, add it to the cart
-                    val cartItemId = cartDatabase.push().key
-                    if (cartItemId != null) {
-                        val newCartItem = CartItem(
-                            id = cartItemId,
-                            title = item.title,
-                            imageUrl = item.imageUrl,
-                            price = item.price,
-                            quantity = 1
-                        )
-
-                        cartDatabase.child(cartItemId).setValue(newCartItem)
-                            .addOnSuccessListener {
-                                Toast.makeText(requireContext(), "Item added to cart", Toast.LENGTH_SHORT).show()
-                            }.addOnFailureListener {
-                                Toast.makeText(requireContext(), "Failed to add item to cart: ${it.message}", Toast.LENGTH_SHORT).show()
-                            }
-                    }
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(requireContext(), "Failed to check cart: ${error.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(requireContext(), "Failed to check cart: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
     private fun getItemData() {
@@ -194,30 +200,21 @@ class HomeFragment : Fragment() {
                 }
             }
 
-
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(requireContext(),error.message,Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
             }
-
         })
     }
 
-
     private fun loadBannerImage() {
         val bannerDatabaseReference = FirebaseDatabase.getInstance().getReference("/banner/imageUrl")
-
         bannerDatabaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val bannerUrl = snapshot.getValue(String::class.java)
                     if (bannerUrl != null) {
-                        // Log the URL for debugging
                         Log.d("HomeFragment", "Banner URL: $bannerUrl")
-
-                        // Load the banner image using Glide
-                        Glide.with(requireContext())
-                            .load(bannerUrl)
-                            .into(binding.bannerImg)
+                        Glide.with(requireContext()).load(bannerUrl).into(binding.bannerImg)
                     } else {
                         Log.e("HomeFragment", "Banner URL is null")
                     }
@@ -232,29 +229,23 @@ class HomeFragment : Fragment() {
         })
     }
 
-
-
     private fun loadCategories() {
-        // Simulating a network delay
         Handler(Looper.getMainLooper()).postDelayed({
-            // Initialize the adapter after data is "loaded"
             homeCategoriesAdapter = HomeCategoriesAdapter(filteredCategories) { category ->
                 when (category.title) {
-                    "Sale" -> findNavController().navigate(R.id.action_homeFragment_to_saleFragment)
-                    "Dresses" -> findNavController().navigate(R.id.action_homeFragment_to_dressesFragment)
-                    "T-shirts" -> findNavController().navigate(R.id.action_homeFragment_to_tshirtsFragment)
-                    "Pants" -> findNavController().navigate(R.id.action_homeFragment_to_pantsFragment)
-                    "Jeans" -> findNavController().navigate(R.id.action_homeFragment_to_jeansFragment)
-                    "See all" -> findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+                    getString(R.string.category_sale) -> findNavController().navigate(R.id.action_homeFragment_to_saleFragment)
+                    getString(R.string.category_dresses) -> findNavController().navigate(R.id.action_homeFragment_to_dressesFragment)
+                    getString(R.string.category_tshirts) -> findNavController().navigate(R.id.action_homeFragment_to_tshirtsFragment)
+                    getString(R.string.category_pants) -> findNavController().navigate(R.id.action_homeFragment_to_pantsFragment)
+                    getString(R.string.category_jeans) -> findNavController().navigate(R.id.action_homeFragment_to_jeansFragment)
+                    getString(R.string.category_see_all) -> findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
                 }
             }
-
-            // Set the adapter
             binding.recyclerViewCategories.adapter = homeCategoriesAdapter
 
-            // Hide progress bar and show RecyclerView
+            // Hide progress bar and show categories
             binding.progressBarCategories.visibility = View.GONE
             binding.recyclerViewCategories.visibility = View.VISIBLE
-        }, 1000) // Simulate a delay of 2 seconds
+        }, 1000)
     }
 }
