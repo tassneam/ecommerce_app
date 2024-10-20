@@ -46,7 +46,6 @@ android {
 
 dependencies {
 
-    implementation(libs.firebase.database)
     val nav_version = "2.7.5"
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -85,7 +84,7 @@ dependencies {
 
 
 
-    // other dependencies
+//     other dependencies
 
     //camera
     implementation (libs.androidx.camera.camera2)
@@ -100,20 +99,20 @@ dependencies {
     implementation (libs.glide.transformations)
     ksp (libs.ksp.v4151)
 
-   /* // Firebase BOM
-    implementation(platform(libs.firebase.bom))
-    //analy
-    implementation ("com.google.firebase:firebase-analytics-ktx")
-    // Firebase libraries
-    implementation(libs.firebase.auth)
-    //service auth
-    implementation(libs.play.services.auth)
-    implementation(libs.google.firebase.firestore)
-    ////////////////////////////////
-    implementation(libs.google.firebase.storage)
-    implementation(libs.google.firebase.database)
+    /* // Firebase BOM
+     implementation(platform(libs.firebase.bom))
+     //analy
+     implementation ("com.google.firebase:firebase-analytics-ktx")
+     // Firebase libraries
+     implementation(libs.firebase.auth)
+     //service auth
+     implementation(libs.play.services.auth)
+     implementation(libs.google.firebase.firestore)
+     ////////////////////////////////
+     implementation(libs.google.firebase.storage)
+     implementation(libs.google.firebase.database)
 
-    */
+     */
     // Import the BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     // Add the dependency for the Firebase Authentication library
