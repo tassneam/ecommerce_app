@@ -1,7 +1,7 @@
 package com.example.ecommerce_app.activities
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerce_app.fragments.shopping.DescriptionFragment
@@ -9,8 +9,13 @@ import com.example.ecommerce_app.fragments.shopping.ReviewsFragment
 import com.example.ecommerce_app.adapters.DetailsPagerAdapter
 import com.example.ecommerce_app.adapters.SizeAdapter
 import com.example.ecommerce_app.databinding.ActivityDetailsBinding
-import com.example.ecommerce_app.util.getProgessDrawable
-import com.example.ecommerce_app.util.loadImage
+import com.example.ecommerce_app.models.CartItem
+import com.example.ecommerce_app.models.Item
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class DetailsActivity : AppCompatActivity() {
     lateinit var binding: ActivityDetailsBinding
@@ -18,44 +23,94 @@ class DetailsActivity : AppCompatActivity() {
     lateinit var sizeList: List<String>
     lateinit var detailsPagerAdapter: DetailsPagerAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityDetailsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        sizeList = listOf("S", "M", "L", "XL")
-        sizeAdapter = SizeAdapter(sizeList)
-        binding.recyclerViewSize.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.recyclerViewSize.adapter = sizeAdapter
+        private lateinit var cartDatabase: DatabaseReference
 
-        binding.backBtn.setOnClickListener {
-            finish()
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            binding = ActivityDetailsBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+
+            // Initialize Firebase Database reference
+            cartDatabase = FirebaseDatabase.getInstance().getReference("cartItems")
+
+            // Initialize size options
+            sizeList = listOf("S", "M", "L", "XL")
+            sizeAdapter = SizeAdapter(sizeList)
+            binding.recyclerViewSize.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerViewSize.adapter = sizeAdapter
+
+            // Initialize fragments for view pager
+            val fragments = listOf(
+                DescriptionFragment(),
+                ReviewsFragment()
+            )
+
+            detailsPagerAdapter = DetailsPagerAdapter(this, supportFragmentManager, fragments)
+            binding.viewPager.adapter = detailsPagerAdapter
+            binding.tabLayout.setupWithViewPager(binding.viewPager)
+
+            // Back button functionality
+            binding.backBtn.setOnClickListener {
+                finish()
+            }
+
+            // Retrieve the Item object from Intent
+            val item = intent.getParcelableExtra<Item>("itemDetails")
+            binding.itemDetails = item
+
+            // Add to Cart button functionality
+            binding.addToCartBtn.setOnClickListener {
+                if (item != null) {
+                    addToCart(item)
+                } else {
+                    Toast.makeText(this, "Item details not found", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
-        val fragments = listOf(
-            DescriptionFragment(),
-            ReviewsFragment()
-        )
+        private fun addToCart(item: Item) {
+            cartDatabase.orderByChild("title").equalTo(item.title)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            for (cartItemSnapshot in snapshot.children) {
+                                val existingCartItem = cartItemSnapshot.getValue(CartItem::class.java)
+                                if (existingCartItem != null) {
+                                    val newQuantity = existingCartItem.quantity + 1
+                                    cartItemSnapshot.ref.child("quantity").setValue(newQuantity)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(this@DetailsActivity, "Item quantity updated", Toast.LENGTH_SHORT).show()
+                                        }.addOnFailureListener {
+                                            Toast.makeText(this@DetailsActivity, "Failed to update item: ${it.message}", Toast.LENGTH_SHORT).show()
+                                        }
+                                }
+                            }
+                        } else {
+                            val cartItemId = cartDatabase.push().key
+                            if (cartItemId != null) {
+                                val newCartItem = CartItem(
+                                    id = cartItemId,
+                                    title = item.title,
+                                    imageUrl = item.imageUrl,
+                                    price = item.price,
+                                    quantity = 1
+                                )
+                                cartDatabase.child(cartItemId).setValue(newCartItem)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(this@DetailsActivity, "Item added to cart", Toast.LENGTH_SHORT).show()
+                                    }.addOnFailureListener {
+                                        Toast.makeText(this@DetailsActivity, "Failed to add item to cart: ${it.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                        }
+                    }
 
-        detailsPagerAdapter = DetailsPagerAdapter(supportFragmentManager, fragments)
-        binding.viewPager.adapter = detailsPagerAdapter
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
-
-        // Get data from item adapter
-        val itemIntent = intent
-        val itemImageUrl = itemIntent.getStringExtra("imageUrl") ?: ""
-        val itemTitle = itemIntent.getStringExtra("title") ?: "No Title"
-        val itemPrice = itemIntent.getStringExtra("price")?.toDoubleOrNull() ?: 0.0
-        val itemRating = itemIntent.getStringExtra("rating")?.toFloatOrNull() ?: 0f
-        val itemRatingCount = itemIntent.getStringExtra("ratingCount")?.toIntOrNull() ?: 0
-
-        Log.d("DetailsActivity", "Retrieved Data - Image URL: $itemImageUrl, Title: $itemTitle, Price: $itemPrice, Rating: $itemRating, Rating Count: $itemRatingCount")
-
-        // Set data to UI components
-        binding.imageUrl.loadImage(itemImageUrl, getProgessDrawable(this))
-        binding.titleTxt.text = itemTitle
-        binding.priceTxt.text = String.format("EGP %.2f", itemPrice) // Ensure price is formatted
-        binding.ratingBar.rating = itemRating
-        binding.ratingTxt.text = String.format("Rating (%d)", itemRatingCount)
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@DetailsActivity, "Failed to check cart: ${error.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+        }
     }
-}
+

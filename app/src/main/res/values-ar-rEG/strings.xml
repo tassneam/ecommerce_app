@@ -71,5 +71,9 @@
     <string name="new_email_address">عنوان بريد إلكتروني جديد</string>
     <string name="new_Password">كلمة مرور جديدة</string>
     <string name="update">تحديث</string>
+    <string name="size">المقاس</string>
+    <string name="description">الوصف</string>
+    <string name="reviews">تقييمات</string>
+    <string name="addToCart">أضف إلى السلة</string>
 
 </resources>

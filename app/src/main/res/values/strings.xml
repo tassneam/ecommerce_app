@@ -90,5 +90,9 @@
     <string name="new_email_address">New Email Address</string>
     <string name="new_Password">New Password</string>
     <string name="update">Update</string>
+    <string name="size">Size</string>
+    <string name="description">Description</string>
+    <string name="reviews">Reviews</string>
+    <string name="addToCart">ADD TO CART</string>
 
 </resources>
