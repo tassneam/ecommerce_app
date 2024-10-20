@@ -9,6 +9,7 @@
     android:background="@color/white"
     tools:context=".activities.SignInActivity">
 
+
     <TextView
         android:id="@+id/logIn"
         android:layout_width="374dp"
@@ -80,22 +81,23 @@
             android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password"
+            app:layout_constraintTop_toBottomOf="@+id/forgotPassword"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="54dp"
+        android:layout_marginTop="6dp"
         android:text="@string/forgot_password"
         android:textColor="@color/medium_gray"
         android:textSize="20dp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.915"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LoginBtn">
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.0">
     </TextView>
 
     <TextView
@@ -111,7 +113,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forgotPassword">
+        app:layout_constraintTop_toBottomOf="@+id/LoginBtn">
     </TextView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

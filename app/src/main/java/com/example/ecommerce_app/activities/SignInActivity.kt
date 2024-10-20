@@ -23,11 +23,12 @@ class SignInActivity : AppCompatActivity() {
         binding.forgotPassword.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
+            finish()
         }
-
         binding.toSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.LoginBtn.setOnClickListener {
@@ -35,18 +36,20 @@ class SignInActivity : AppCompatActivity() {
             val pass = binding.passwordEditText1.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Start MainActivity instead of HomeFragment
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val intent = Intent(this, HomeFragment::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
-                        Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+
                     }
                 }
             } else {
-                Toast.makeText(this, "Empty Fields Are Not Allowed !!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+
             }
         }
     }
@@ -55,11 +58,9 @@ class SignInActivity : AppCompatActivity() {
         super.onStart()
 
         if (firebaseAuth.currentUser != null) {
-            // Start MainActivity instead of HomeFragment
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            val intent = Intent(this, HomeFragment::class.java)
             startActivity(intent)
-            finish() // Optional: Call finish() to close SignInActivity
+            finish()
         }
     }
 }
