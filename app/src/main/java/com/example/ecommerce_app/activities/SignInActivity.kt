@@ -23,10 +23,12 @@ class SignInActivity : AppCompatActivity() {
         binding.forgotPassword.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
+            finish()
         }
         binding.toSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.LoginBtn.setOnClickListener {
@@ -39,6 +41,7 @@ class SignInActivity : AppCompatActivity() {
                     if (it.isSuccessful) {
                         val intent = Intent(this, HomeFragment::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
 
@@ -57,6 +60,7 @@ class SignInActivity : AppCompatActivity() {
         if (firebaseAuth.currentUser != null) {
             val intent = Intent(this, HomeFragment::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

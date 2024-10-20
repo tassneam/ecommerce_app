@@ -36,6 +36,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                             Toast.makeText(this, getString(R.string.reset_email_sent), Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, EmailVerificationActivity::class.java)
                             startActivity(intent)
+                            finish()
                         } else {
                             val error = task.exception?.message.toString()
                             binding.textViewErrorMessage.text = error

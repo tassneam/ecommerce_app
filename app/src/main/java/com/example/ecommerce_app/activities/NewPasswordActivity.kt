@@ -42,6 +42,7 @@ class NewPasswordActivity : AppCompatActivity() {
                                 intent.flags =
                                     Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
+                                finish()
                             } else {
                                 val error = task.exception?.message.toString()
                                 Toast.makeText(this, error, Toast.LENGTH_SHORT).show()

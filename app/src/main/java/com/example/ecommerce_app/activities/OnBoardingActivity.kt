@@ -16,6 +16,7 @@ class OnBoardingActivity : AppCompatActivity() {
          binding.getStartedBtn.setOnClickListener {
                     val intent = Intent(this, SignInActivity::class.java)
                     startActivity(intent)
+                    finish()
         }
     }
 }
