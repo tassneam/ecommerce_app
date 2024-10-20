@@ -1,8 +1,11 @@
 package com.example.ecommerce_app.activities
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -27,9 +30,14 @@ class Cart : AppCompatActivity() {
 
     // Initialize totalPriceTextView here
     totalPriceTextView = findViewById(R.id.totalPrice)
+    //offline button
+        val btnOfflinePayment = findViewById<View>(R.id.btnOfflinePayment)
+        btnOfflinePayment.setOnClickListener {
+            showOfflinePaymentDialog()
+        }
 
-    val checkoutBtn = findViewById<Button>(R.id.checkout_btn)
-    checkoutBtn.setOnClickListener {
+    val OnlinePaymentButton = findViewById<Button>(R.id.btnOnlinePayment)
+        OnlinePaymentButton.setOnClickListener {
         // Retrieve the total price value from the TextView and pass it to the Payment activity
         val totalPrice = totalPriceTextView.text.toString().replace(" EGP", "").toDouble()
         val intent = Intent(this, Payment::class.java)
@@ -76,5 +84,19 @@ class Cart : AppCompatActivity() {
     private fun updateTotalPrice() {
         val totalPrice = cartItemsList.sumOf { it.price * it.quantity }
         totalPriceTextView.text = String.format("%.2f EGP", totalPrice)
+    }
+    private fun showOfflinePaymentDialog() {
+        val dialog = Dialog(this)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.activity_dialog_offline_payment, null)
+        dialog.setContentView(dialogView)
+
+        // Find the OK button inside the dialog and set click listener
+        val btnOk = dialogView.findViewById<View>(R.id.btnOk)
+        btnOk.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Show the dialog
+        dialog.show()
     }
 }

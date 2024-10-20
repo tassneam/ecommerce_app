@@ -22,7 +22,7 @@
                 android:id="@+id/descriptionTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/textview"
                 android:layout_margin="16dp"
                 android:textColor="@color/black"
                 />

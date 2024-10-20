@@ -10,6 +10,7 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -22,34 +23,24 @@ import org.json.JSONObject
 
 
 class Payment : AppCompatActivity() {
+    private lateinit var progressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_payment)
 
-        // Get the total price from the Intent
-        val totalPrice = intent.getDoubleExtra("total_price", 0.0)
-        Log.d("PaymentActivity", "Total Price: $totalPrice")
-
-        // Display the total price in the total_amount_value TextView using string resource
-      //  val totalAmountValue = findViewById<TextView>(R.id.total_amount_value)
-         // Use the resource string
-     //   totalAmountValue.text = getString(R.string.total_amount_format, totalPrice)
-
-        // Display the total price in the total_amount_value TextView
-      //  totalAmountValue.text = String.format("%.2f", totalPrice) + " EGP"  // Format to 2 decimal places
-
+        progressBar = findViewById(R.id.progressbar_payment)
         // Handle the payment process
         handlePayment()
-
         //back icon
         val backIcon = findViewById<ImageView>(R.id.backIcon)
         backIcon.setOnClickListener {
            onBackPressed() // Or finish() in an activity
        }
-
     }
     private fun handlePayment() {
+        // Show the ProgressBar
+        progressBar.visibility = View.VISIBLE
         // Step 1: Authenticate
         PaymobService.getAuthToken(
             onSuccess = { token ->
@@ -104,36 +95,26 @@ class Payment : AppCompatActivity() {
             }
         )
     }
-
-    ////////////////////////////////2
     private fun openPaymentWebView(paymentKey: String) {
         val webView = findViewById<WebView>(R.id.paymentWebView)
         webView.settings.javaScriptEnabled = true
         webView.visibility = View.VISIBLE // Make the WebView visible
-
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
                 // Handle payment success or failure based on the URL
                 if (url.contains("success_url")) {
+                    // Hide the ProgressBar after task completion
+                    progressBar.visibility = View.GONE
                     Toast.makeText(this@Payment, "Payment Successful!", Toast.LENGTH_SHORT).show()
                     finish() // Close activity or handle post-payment actions
                 } else if (url.contains("failure_url")) {
                     Toast.makeText(this@Payment, "Payment Failed.", Toast.LENGTH_SHORT).show()
-
-
                 }
             }
         }
         // Redirect user to the Paymob payment page
         val checkoutUrl = "https://accept.paymobsolutions.com/api/acceptance/iframes/875187?payment_token=$paymentKey"
         webView.loadUrl(checkoutUrl)
-
-    }
-
-    private fun launchPaymentInBrowser(paymentKey: String) {
-        val checkoutUrl = "https://accept.paymob.com/api/acceptance/iframes/875188?payment_token={payment_key_obtained_previously}"
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(checkoutUrl))
-        startActivity(browserIntent)
     }
 }

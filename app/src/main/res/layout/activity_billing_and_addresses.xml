@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+        <ImageView
+            android:id="@+id/backIcon_BillingAndAddresses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Back Icon"
+            android:paddingStart="3dp"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/billing_and_addresses"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="3dp">
+        </TextView>
+    </LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        android:layout_marginTop="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:outlineAmbientShadowColor="@color/purple">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_your_data"
+                android:textSize="20dp"
+                android:textStyle="bold"
+               android:layout_marginTop="5dp"
+                android:textColor="@color/purple"
+                android:layout_gravity="center">
+            </TextView>
+            <!-- First Name -->
+            <EditText
+                android:id="@+id/etFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/light_purple"
+                android:layout_marginTop="10dp"/>
+
+            <!-- Last Name -->
+            <EditText
+                android:id="@+id/etLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- Email -->
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/e_mail"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- Phone Number -->
+            <EditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone"
+                android:inputType="phone"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- Apartment -->
+            <EditText
+                android:id="@+id/etApartment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/apartment"
+                android:inputType="text"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- Floor -->
+            <EditText
+                android:id="@+id/etFloor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/floor"
+                android:inputType="text"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- Street -->
+            <EditText
+                android:id="@+id/etStreet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/street"
+                android:inputType="text"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- Building -->
+            <EditText
+                android:id="@+id/etBuilding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/building"
+                android:inputType="text"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- City -->
+            <EditText
+                android:id="@+id/etCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/city"
+                android:inputType="text"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- State -->
+            <EditText
+                android:id="@+id/etState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/state"
+                android:inputType="text"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- Country -->
+            <EditText
+                android:id="@+id/etCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/country"
+                android:inputType="text"
+                android:textColorHint="@color/light_purple"/>
+
+            <!-- Postal Code -->
+            <EditText
+                android:id="@+id/etPostalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/postal_code"
+                android:inputType="textPostalAddress"
+                android:textColorHint="@color/light_purple"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="8dp">
+                <!-- confirm data  Button -->
+                <Button
+                    android:id="@+id/btnOnlinePayment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/purple"
+                    android:text="@string/confirm_data"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressbar_billingAndAddresses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center">
+            </ProgressBar>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

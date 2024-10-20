@@ -75,5 +75,32 @@
     <string name="description">الوصف</string>
     <string name="reviews">تقييمات</string>
     <string name="addToCart">أضف إلى السلة</string>
+    <string name="home">الرئيسية</string>
+    <string name="search">البحث</string>
+    <string name="cart">العربة</string>
+    <string name="favourite">المفضل</string>
+    <string name="setting">الاعدادات</string>
+    <string name="egp_0_00">جنية 0.00</string>
+    <string name="categories">الفئات</string>
+    <string name="textview">عرض النص</string>
+    <string name="confirm_data">تاكيد البيانات </string>
+    <string name="pay_online">
+الدفع عبر الإنترنت</string>
+    <string name="pay_offline">الدفع عند الاستلام</string>
+    <string name="enter_your_data">(Enter Your Data)</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="e_mail">E-mail</string>
+    <string name="phone">Phone</string>
+    <string name="apartment">Apartment</string>
+    <string name="floor">Floor</string>
+    <string name="street">Street</string>
+    <string name="building">Building</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="country">Country</string>
+    <string name="postal_code">Postal code</string>
+    <string name="order_will_be_recived_during_4_days_cash_on_delivery">سيتم استلام الطلب خلال 4 أيام الدفع عند الاستلام</string>
+    <string name="ok">حسنا</string>
 
 </resources>

@@ -12,6 +12,7 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.ecommerce_app.R
+import com.example.ecommerce_app.activities.BillingAndAddresses
 import com.example.ecommerce_app.activities.Cart
 import com.example.ecommerce_app.activities.MainActivity
 import com.example.ecommerce_app.activities.SignInActivity
@@ -63,6 +64,11 @@ class SettingFragment : Fragment() {
         // Navigate to Profile
         binding.myprofile.setOnClickListener {
             findNavController().navigate(R.id.action_settingFragment_to_profileFragment)
+        }
+        // Navigate to Billing and Addresses
+        binding.goBillingAndAddresses.setOnClickListener {
+            val intent = Intent(requireContext(), BillingAndAddresses::class.java)
+            startActivity(intent)
         }
     }
 

@@ -87,17 +87,22 @@ dependencies {
 //     other dependencies
 
     //camera
-    implementation (libs.androidx.camera.camera2)
-    implementation (libs.androidx.camera.lifecycle)
-    implementation (libs.androidx.camera.view)
+    implementation("androidx.camera:camera-camera2:1.2.0")
+    implementation("androidx.camera:camera-lifecycle:1.2.0")
+    implementation("androidx.camera:camera-view:1.2.0")
 ////////////////////////////////////////////////////////////////////////////
     //Glide for more advanced image loading and manipulation
-    implementation (libs.github.glide)
-    ksp (libs.compiler)
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    ksp("com.github.bumptech.glide:ksp:4.15.1")
     //test
-    implementation (libs.glide.v4151)
-    implementation (libs.glide.transformations)
-    ksp (libs.ksp.v4151)
+    // Glide main library
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+
+    // Glide transformations library
+    implementation("jp.wasabeef:glide-transformations:4.3.0")
+
+    // Kotlin Symbol Processing (KSP) for Glide
+    ksp("com.github.bumptech.glide:ksp:4.15.1")
 
     /* // Firebase BOM
      implementation(platform(libs.firebase.bom))
@@ -131,9 +136,12 @@ dependencies {
     implementation("com.google.firebase:firebase-storage")
 
     //payment implementaion
-    // Add OkHttp for network requests
-    implementation (libs.okhttp)
-    implementation (libs.gson) // For JSON parsing
+    // OkHttp for HTTP requests
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+
+// Gson for JSON parsing
+    implementation("com.google.code.gson:gson:2.10.1")
+
 
 
 }

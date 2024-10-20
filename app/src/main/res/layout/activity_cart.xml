@@ -60,19 +60,38 @@
             android:id="@+id/totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EGP 0.00"
+            android:text="@string/egp_0_00"
             android:textSize="30dp"
             android:layout_margin="8dp"/>
         </LinearLayout>
     <!-- Checkout Button -->
-    <Button
-        android:id="@+id/checkout_btn"
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/check_out"
-        android:textSize="18sp"
-        android:padding="12dp"
-        android:backgroundTint="@color/purple"
-        android:layout_marginBottom="40dp"
-        android:layout_marginTop="4dp"/>
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:paddingTop="8dp">
+        <!-- Online Payment Button -->
+        <Button
+            android:id="@+id/btnOnlinePayment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pay_online"
+            android:backgroundTint="@color/purple"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <!-- Offline Payment Button -->
+        <Button
+            android:id="@+id/btnOfflinePayment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pay_offline"
+            android:backgroundTint="@color/light_purple"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"
+            android:layout_margin="2dp"/>
+    </LinearLayout>
 </LinearLayout>
