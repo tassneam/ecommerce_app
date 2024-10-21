@@ -48,15 +48,18 @@ class Payment : AppCompatActivity() {
 
                 // Create billing data
                 val billingDataMap = mapOf(
+                    "first_name" to "John",
+                    "last_name" to "Doe",
                     "email" to "customer@example.com", // Replace with the actual email
                     "phone_number" to "01234567890",   // Replace with the actual phone number
-                    "first_name" to "John",             // Replace with the actual first name
-                    "last_name" to "Doe",                // Replace with the actual last name
                     "country" to "Egypt",               // Replace with the actual country
                     "city" to "Cairo",                  // Replace with the actual city
-                    "state" to "Cairo",                 // Replace with the actual state (if applicable)
-                    "zip" to "12345",                   // Replace with the actual zip code (if applicable)
-                    "street" to "123 Example St"       // Replace with the actual street address
+                    "state" to "Cairo",
+                    "street" to "123 Example St",// Replace with the actual state (if applicable)
+                    "building" to "5",
+                    "floor" to "2",
+                    "apartment" to "10",
+                    "postal_code" to "12345",
                 )
                 // Convert the Map to JSONObject
                 val billingData = JSONObject(billingDataMap)
