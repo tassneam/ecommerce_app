@@ -120,5 +120,7 @@
     <string name="postal_code">Postal code</string>
     <string name="order_will_be_recived_during_4_days_cash_on_delivery">Order will be recived during 4 days Cash on Delivery</string>
     <string name="ok">OK</string>
+    <string name="favorite">Favorite</string>
+    <string name="favourit">Favourit</string>
 
 </resources>

@@ -31,7 +31,7 @@ class Cart : AppCompatActivity() {
     // Initialize totalPriceTextView here
     totalPriceTextView = findViewById(R.id.totalPrice)
     //offline button
-        val btnOfflinePayment = findViewById<View>(R.id.btnOfflinePayment)
+        val btnOfflinePayment = findViewById<Button>(R.id.btnOfflinePayment)
         btnOfflinePayment.setOnClickListener {
             showOfflinePaymentDialog()
         }

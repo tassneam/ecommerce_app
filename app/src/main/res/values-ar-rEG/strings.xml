@@ -102,5 +102,7 @@
     <string name="postal_code">الرمز البريدى</string>
     <string name="order_will_be_recived_during_4_days_cash_on_delivery">سيتم استلام الطلب خلال 4 أيام الدفع عند الاستلام</string>
     <string name="ok">حسنا</string>
+    <string name="favorite">Favorite</string>
+    <string name="favourit">Favourit</string>
 
 </resources>

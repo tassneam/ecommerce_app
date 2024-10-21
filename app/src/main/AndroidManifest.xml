@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Ecommerce_app"
         tools:targetApi="31">
         <activity
+            android:name=".activities.FavoriteItemsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.DialogOfflinePayment"
             android:exported="false" />
         <activity

@@ -1,6 +1,8 @@
 package com.example.ecommerce_app.fragments.shopping
 
+import FavoritesAdapter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -10,10 +12,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce_app.R
+//import com.example.ecommerce_app.adapters.FavoritesAdapter
 import com.example.ecommerce_app.adapters.ItemAdapter
 import com.example.ecommerce_app.databinding.FragmentSaleBinding
 import com.example.ecommerce_app.models.CartItem
+import com.example.ecommerce_app.models.FavouriteData
 import com.example.ecommerce_app.models.Item
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,10 +27,14 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class SaleFragment : Fragment() {
+    private lateinit var recyclerView: RecyclerView
     lateinit var binding: FragmentSaleBinding
     lateinit var database: DatabaseReference
     private lateinit var itemList: ArrayList<Item>
     private lateinit var itemAdapter: ItemAdapter
+
+    private lateinit var favoritesAdapter: FavoritesAdapter
+    private lateinit var favoriteItems: ArrayList<FavouriteData>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,15 +53,24 @@ class SaleFragment : Fragment() {
 
 
         itemList = ArrayList()
-        itemAdapter = ItemAdapter(requireContext(), itemList) { selectedItem ->
-            // Add item to cart in Firebase
-            addToCart(selectedItem)
-        }
+        // Initialize the adapter with item list and click listeners
+        itemAdapter = ItemAdapter(
+            context = requireContext(),
+            itemList = itemList,
+            onCartClick = { item ->
+                addToCart(item) // Define this function to handle cart click
+            },
+            onFavoriteClick = { item ->
+                addToFavorites(convertToFavouriteData(item)) // Define this function to handle favorite click
+            }
+        )
+        // Set the adapter to the RecyclerView
+       // recyclerView.adapter = itemAdapter
         binding.recyclerViewSale.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         binding.recyclerViewSale.setHasFixedSize(true)
         binding.recyclerViewSale.adapter = itemAdapter
-
         getItemData()
+        //fetchFavorites()
     }
     private fun addToCart(item: Item) {
         val cartDatabase = FirebaseDatabase.getInstance().getReference("cartItems")
@@ -97,6 +115,73 @@ class SaleFragment : Fragment() {
             }
 
         })
+    }
+//    private fun fetchFavorites() {
+//        val db = FirebaseDatabase.getInstance().reference.child("item")
+//        db.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                favoriteItems.clear()
+//                for (data in snapshot.children) {
+//                    val item = data.getValue(FavouriteData::class.java)
+//                    if (item != null) {
+//                        favoriteItems.add(item)
+//                    }
+//                }
+//                // Notify adapter about data changes
+//                favoritesAdapter.notifyDataSetChanged()
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                // Handle error
+//                Log.e("Favorite", "Failed to load Favorite items: ${error.message}")
+//            }
+//        })
+//    }
+
+    private fun addToFavorites(item: FavouriteData) {
+        val favoritesDatabase = FirebaseDatabase.getInstance().getReference("favoriteItems")
+        favoritesDatabase.orderByChild("title").equalTo(item.title)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        Toast.makeText(requireContext(), "Item is already in favorites", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val favoriteItemId = favoritesDatabase.push().key
+                        if (favoriteItemId != null) {
+                            val newFavoriteItem = FavouriteData(
+                                id = favoriteItemId,
+                                imageUrl = item.imageUrl,
+                                title = item.title,
+                                price = item.price,
+                                rating = item.rating,
+                                ratingCount = item.ratingCount,
+                                isFavorite = true
+                            )
+                            favoritesDatabase.child(favoriteItemId).setValue(newFavoriteItem)
+                                .addOnSuccessListener {
+                                    Toast.makeText(requireContext(), "Item added to favorites", Toast.LENGTH_SHORT).show()
+                                }.addOnFailureListener {
+                                    Toast.makeText(requireContext(), "Failed to add item to favorites: ${it.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(requireContext(), "Failed to add to favorites: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+    private fun convertToFavouriteData(item: Item): FavouriteData {
+        return FavouriteData(
+            id = item.id, // Assuming `Item` has an `id` field, otherwise generate a unique ID
+            imageUrl = item.imageUrl,
+            title = item.title,
+            price = item.price,
+            rating = item.rating, // Assuming `Item` has a `rating` field
+            ratingCount = item.ratingCount, // Assuming `Item` has a `ratingCount` field
+            isFavorite = true // Mark it as a favorite
+        )
     }
 
 }

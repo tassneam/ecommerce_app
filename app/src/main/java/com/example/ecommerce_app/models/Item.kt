@@ -5,19 +5,23 @@ import android.os.Parcelable
 
 // Add the no-argument constructor
 data class Item(
+    var id:String="",
     val imageUrl: String = "",
     val title: String = "",
     val price: Double = 0.0,
     val rating: Float = 0f,
-    val ratingCount: Int = 0
+    val ratingCount: Int = 0,
+    var isFavorite: Boolean= false
 ) : Parcelable {
     // Parcelable implementation
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
+        parcel.readString() ?: "",
         parcel.readDouble(),
         parcel.readFloat(),
-        parcel.readInt()
+        parcel.readInt(),
+        parcel.readByte() != 0.toByte() // Reading isFavorite as a boolean
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -26,6 +30,7 @@ data class Item(
         parcel.writeDouble(price)
         parcel.writeFloat(rating)
         parcel.writeInt(ratingCount)
+        parcel.writeByte(if (isFavorite) 1 else 0) // Writing isFavorite as a byte
     }
 
     override fun describeContents(): Int {
@@ -41,4 +46,9 @@ data class Item(
             return arrayOfNulls(size)
         }
     }
+    // Method to handle the favorite click
+    fun toggleFavorite() {
+        isFavorite = !isFavorite
+    }
+
 }

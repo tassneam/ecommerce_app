@@ -1,5 +1,6 @@
 package com.example.ecommerce_app.fragments.shopping
 
+import FavoritesAdapter
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -18,13 +19,17 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecommerce_app.R
+import com.example.ecommerce_app.activities.FavoriteItemsActivity
+//import com.example.ecommerce_app.adapters.FavoritesAdapter
 import com.example.ecommerce_app.adapters.HomeCategoriesAdapter
 import com.example.ecommerce_app.adapters.ItemAdapter
 import com.example.ecommerce_app.databinding.FragmentHomeBinding
 import com.example.ecommerce_app.models.CartItem
 import com.example.ecommerce_app.models.Category
+import com.example.ecommerce_app.models.FavouriteData
 import com.example.ecommerce_app.models.Item
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,15 +39,18 @@ import com.google.firebase.database.ValueEventListener
 import java.util.Locale
 
 class HomeFragment : Fragment() {
+    private lateinit var recyclerView: RecyclerView
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeCategoriesAdapter: HomeCategoriesAdapter
-
     private lateinit var categories: List<Category>
     private var filteredCategories: MutableList<Category> = mutableListOf()
-
     lateinit var database: DatabaseReference
-    private lateinit var itemList: ArrayList<Item>
+
     private lateinit var itemAdapter: ItemAdapter
+    private lateinit var itemList: ArrayList<Item>
+
+    private lateinit var favoritesAdapter: FavoritesAdapter
+    private lateinit var favoriteItems: ArrayList<FavouriteData>
 
     companion object {
         private const val REQUEST_CODE_SPEECH_INPUT = 100
@@ -58,6 +66,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.searchEditTxt.isCursorVisible = false
 
         // Initialize the categories after the view is created
@@ -78,19 +87,28 @@ class HomeFragment : Fragment() {
         // Set up RecyclerView
         binding.recyclerViewCategories.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
         loadCategories()
         loadBannerImage()
 
+        //////////////////////////////////
         itemList = ArrayList()
-        itemAdapter = ItemAdapter(requireContext(), itemList) { selectedItem ->
-            addToCart(selectedItem)
-        }
+        // Initialize the adapter with item list and click listeners
+        itemAdapter = ItemAdapter(
+            context = requireContext(),
+            itemList = itemList,
+            onCartClick = { item ->
+                addToCart(item) // Define this function to handle cart click
+            },
+            onFavoriteClick = { item ->
+                addToFavorites(convertToFavouriteData(item)) // Define this function to handle favorite click
+            }
+        )
+        // Set the adapter to the RecyclerView
         binding.recyclerViewCard.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         binding.recyclerViewCard.setHasFixedSize(true)
         binding.recyclerViewCard.adapter = itemAdapter
-
         getItemData()
+        ///////////////////////////////
 
         binding.searchEditTxt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -247,5 +265,53 @@ class HomeFragment : Fragment() {
             binding.progressBarCategories.visibility = View.GONE
             binding.recyclerViewCategories.visibility = View.VISIBLE
         }, 1000)
+    }
+
+    private fun addToFavorites(item: FavouriteData) {
+        val favoritesDatabase = FirebaseDatabase.getInstance().getReference("favoriteItems")
+        favoritesDatabase.orderByChild("title").equalTo(item.title)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        Toast.makeText(requireContext(), "Item is already in favorites", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val favoriteItemId = favoritesDatabase.push().key
+                        if (favoriteItemId != null) {
+                            val newFavoriteItem = FavouriteData(
+                                id = favoriteItemId,
+                                imageUrl = item.imageUrl,
+                                title = item.title,
+                                price = item.price,
+                                rating = item.rating,
+                                ratingCount = item.ratingCount,
+                                isFavorite = true
+                            )
+                            favoritesDatabase.child(favoriteItemId).setValue(newFavoriteItem)
+                                .addOnSuccessListener {
+                                    if (isAdded) {
+                                        Toast.makeText(requireContext(), "Item added to favorites", Toast.LENGTH_SHORT).show()
+                                    }
+                                }.addOnFailureListener {
+                                    Toast.makeText(requireContext(), "Failed to add item to favorites: ${it.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(requireContext(), "Failed to add to favorites: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+    private fun convertToFavouriteData(item: Item): FavouriteData {
+        return FavouriteData(
+            id = item.id, // Assuming `Item` has an `id` field, otherwise generate a unique ID
+            imageUrl = item.imageUrl,
+            title = item.title,
+            price = item.price,
+            rating = item.rating, // Assuming `Item` has a `rating` field
+            ratingCount = item.ratingCount, // Assuming `Item` has a `ratingCount` field
+            isFavorite = true // Mark it as a favorite
+        )
     }
 }

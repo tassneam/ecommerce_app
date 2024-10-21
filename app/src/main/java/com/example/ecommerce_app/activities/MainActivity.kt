@@ -2,6 +2,7 @@ package com.example.ecommerce_app.activities
 
 import android.content.Context
 import android.content.Intent
+import android.media.RouteListingPreference.Item
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -12,6 +13,7 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val favoriteItems = mutableListOf<Item>() // Store favorite items
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize SharedPreferences
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.shoppingHostFragment)
         binding.bottomNavigation.setupWithNavController(navController)
 
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
+       /* binding.bottomNavigation.setOnItemSelectedListener { item ->
             if (item.itemId == R.id.action_cartFragment) {
                 val intent = Intent(this, Cart::class.java)
                 startActivity(intent)
@@ -38,6 +40,45 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(item.itemId)
                 true
             }
+        }
+        */
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_cartFragment -> {
+                    val intent = Intent(this, Cart::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.favouriteFragment -> {
+                    // Navigate to a new activity showing the list of favorite items
+                    val intent = Intent(this, FavoriteItemsActivity::class.java)
+                    intent.putParcelableArrayListExtra("FAVORITE_ITEMS", ArrayList(favoriteItems))
+                    startActivity(intent)
+                    true
+                }
+                else -> {
+                    navController.navigate(item.itemId)
+                    true
+                }
+            }
+        }
+    }
+
+
+    private fun setLocale(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
+    /*
+    // Callback to handle adding/removing items from the favorites list
+    fun handleFavoriteItem(item: Item) {
+        if (item.isFavorite) {
+            favoriteItems.add(item)
+        } else {
+            favoriteItems.remove(item)
         }
     }
 
@@ -48,4 +89,6 @@ class MainActivity : AppCompatActivity() {
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
     }
+
+     */
 }
