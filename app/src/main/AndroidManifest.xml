@@ -13,10 +13,10 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/logotwo"
+        android:icon="@mipmap/logofive"
         android:label="Vista"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/logotwo"
+        android:roundIcon="@mipmap/logofive"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce_app"
         tools:targetApi="31">
