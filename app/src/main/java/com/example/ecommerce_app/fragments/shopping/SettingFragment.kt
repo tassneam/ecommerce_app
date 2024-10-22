@@ -19,11 +19,14 @@ import com.example.ecommerce_app.activities.SignInActivity
 import com.example.ecommerce_app.databinding.FragmentSettingBinding
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale
+import com.google.firebase.database.*
 
 class SettingFragment : Fragment() {
+
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: FragmentSettingBinding
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +34,9 @@ class SettingFragment : Fragment() {
     ): View {
         binding = FragmentSettingBinding.inflate(layoutInflater)
         auth = FirebaseAuth.getInstance()
+
+        // Initialize Firebase Database reference
+        database = FirebaseDatabase.getInstance().reference
 
         // Initialize SharedPreferences
         sharedPreferences = requireContext().getSharedPreferences("app_settings", Context.MODE_PRIVATE)
@@ -40,6 +46,13 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Fetch the user data from Firebase and display the username
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val uid = currentUser.uid
+            fetchUsername(uid)
+        }
 
         // Logout action
         binding.logoutLayout.setOnClickListener {
@@ -65,11 +78,33 @@ class SettingFragment : Fragment() {
         binding.myprofile.setOnClickListener {
             findNavController().navigate(R.id.action_settingFragment_to_profileFragment)
         }
+
         // Navigate to Billing and Addresses
         binding.goBillingAndAddresses.setOnClickListener {
             val intent = Intent(requireContext(), BillingAndAddresses::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun fetchUsername(uid: String) {
+        // Database path where the user information is stored
+        val userRef = database.child("users").child(uid)
+
+        // Add a listener to retrieve the user data
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val username = snapshot.child("username").getValue(String::class.java)
+                    username?.let {
+                        binding.profileName.text = it
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle possible errors, such as logging the error
+            }
+        })
     }
 
     private fun showLanguagePopup(view: View) {
