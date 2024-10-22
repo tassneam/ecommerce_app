@@ -30,7 +30,7 @@ class FavoritesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): favoriteItemsViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_layout, parent, false)
+            .inflate(R.layout.favorite_card, parent, false)
         return favoriteItemsViewHolder(view)
     }
 
