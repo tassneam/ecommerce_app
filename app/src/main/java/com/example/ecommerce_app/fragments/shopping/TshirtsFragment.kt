@@ -73,27 +73,46 @@ class TshirtsFragment : Fragment() {
     }
     private fun addToCart(item: Item) {
         val cartDatabase = FirebaseDatabase.getInstance().getReference("cartItems")
-        val cartItemId = cartDatabase.push().key // Generate a unique ID for the cart item
+        cartDatabase.orderByChild("title").equalTo(item.title)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (cartItemSnapshot in snapshot.children) {
+                            val existingCartItem = cartItemSnapshot.getValue(CartItem::class.java)
+                            if (existingCartItem != null) {
+                                val newQuantity = existingCartItem.quantity + 1
+                                cartItemSnapshot.ref.child("quantity").setValue(newQuantity)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(requireContext(), "Item quantity updated", Toast.LENGTH_SHORT).show()
+                                    }.addOnFailureListener {
+                                        Toast.makeText(requireContext(), "Failed to update item: ${it.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                        }
+                    } else {
+                        val cartItemId = cartDatabase.push().key
+                        if (cartItemId != null) {
+                            val newCartItem = CartItem(
+                                id = cartItemId,
+                                title = item.title,
+                                imageUrl = item.imageUrl,
+                                price = item.price,
+                                quantity = 1
+                            )
+                            cartDatabase.child(cartItemId).setValue(newCartItem)
+                                .addOnSuccessListener {
+                                    Toast.makeText(requireContext(), "Item added to cart", Toast.LENGTH_SHORT).show()
+                                }.addOnFailureListener {
+                                    Toast.makeText(requireContext(), "Failed to add item to cart: ${it.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    }
+                }
 
-        if (cartItemId != null) {
-            val cartItem = CartItem(
-                id = cartItemId,
-                title = item.title,
-                imageUrl = item.imageUrl,
-                price = item.price,
-                quantity=1
-            )
-
-            cartDatabase.child(cartItemId).setValue(cartItem).addOnSuccessListener {
-                Toast.makeText(requireContext(), "Item added to cart", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to add item to cart: ${it.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(requireContext(), "Failed to check cart: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
     private fun getItemData() {
         database = FirebaseDatabase.getInstance().getReference("tshirts")
