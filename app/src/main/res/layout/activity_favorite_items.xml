@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/favourit"
+            android:text="@string/favorite"
             android:textSize="30sp"
             android:textColor="@color/black"
             android:layout_margin="6dp"/>

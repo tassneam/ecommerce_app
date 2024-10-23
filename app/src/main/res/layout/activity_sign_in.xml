@@ -16,13 +16,25 @@
         android:layout_height="87dp"
         android:layout_marginStart="16dp"
         android:text="@string/welcome_login_to_your_account"
-        android:textColor="@color/purple"
-        android:textSize="35dp"
-        android:textStyle="bold"
+        android:textColor="@color/light_purple"
+        android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintBottom_toTopOf="@+id/signin_viewtxt"
         tools:layout_editor_absoluteY="121dp">
+    </TextView>
+    <TextView
+        android:id="@+id/signin_viewtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:textSize="46dp"
+        android:textColor="@color/purple"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/logIn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/email">
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -36,14 +48,16 @@
         app:errorTextColor="@color/design_default_color_error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/emailEditText1"
             android:hint="@string/email_address"
-            android:inputType="textEmailAddress">
+            android:inputType="textEmailAddress"
+            android:drawableEnd="@drawable/baseline_mail_outline">
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,20 +83,30 @@
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ProgressBar
+        android:id="@+id/progressbar_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password"
+        app:layout_constraintBottom_toTopOf="@+id/LoginBtn">
+    </ProgressBar>
+
     <Button
         android:id="@+id/LoginBtn"
-        android:layout_width="177dp"
-        android:layout_height="69dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/login"
         android:textSize="20dp"
-        android:textStyle="bold"
         android:textColor="@color/white"
-        android:backgroundTint="#897AE4"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forgotPassword"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        android:backgroundTint="@color/purple"
+        android:layout_marginTop="60dp"/>
 
     <TextView
         android:id="@+id/forgotPassword"
@@ -90,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="@string/forgot_password"
-        android:textColor="@color/medium_gray"
+        android:textColor="@color/light_purple"
         android:textSize="20dp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,10 +131,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="44dp"
         android:text="@string/Sign_In"
-        android:textColor="@color/medium_gray"
+        android:textColor="@color/light_purple"
         android:textSize="20dp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LoginBtn">

@@ -35,7 +35,6 @@ class SplashScreen : AppCompatActivity() {
             finish() // Close SplashScreen
         }, 5000)
     }
-
     private fun init() {
         firebaseAuth = FirebaseAuth.getInstance()
     }

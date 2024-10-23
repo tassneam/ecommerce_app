@@ -10,6 +10,7 @@
     android:padding="16dp"
     android:background="@drawable/dialog_background"
     tools:context=".activities.DialogOfflinePayment">
+
     <ImageView
         android:id="@+id/deliveryView"
         android:layout_width="150dp"

@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="item2"
             type="com.example.ecommerce_app.models.FavouriteData" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/cardbox_background"
-        android:elevation="3dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="222dp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/cardbox_background"
+        android:elevation="3dp">
+
         <ImageView
             android:id="@+id/image"
-            android:layout_width="175dp"
-            android:layout_height="155dp"
+            android:layout_width="357dp"
+            android:layout_height="149dp"
             android:layout_marginTop="10dp"
             android:imageUrl="@{item2.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/ic_shopping_cart"
             app:layout_constraintBottom_toBottomOf="@+id/priceTxt"
             app:layout_constraintEnd_toEndOf="@+id/title"
@@ -103,12 +105,12 @@
         <!-- Add Favorite Icon -->
         <ImageView
             android:id="@+id/favorite"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="15dp"
-            android:src="@drawable/baseline_favorite_border_24"
             android:contentDescription="@string/favorite"
-            app:layout_constraintTop_toTopOf="@id/image"
-            app:layout_constraintEnd_toEndOf="parent" />
+            android:src="@drawable/baseline_favorite_border_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
